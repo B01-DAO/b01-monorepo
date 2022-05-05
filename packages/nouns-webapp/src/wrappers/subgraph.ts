@@ -57,8 +57,8 @@ export const auctionQuery = (auctionId: number) => gql`
 		seed {
       volumeCount
       maxVolumeHeight
-      waterFeatureCoun
-      grassFeatureCoun
+      waterFeatureCount
+      grassFeatureCount
       treeCount
       bushCount
       peopleCount
@@ -107,8 +107,8 @@ export const nounQuery = (id: string) => gql`
 	  seed {
       volumeCount
       maxVolumeHeight
-      waterFeatureCoun
-      grassFeatureCoun
+      waterFeatureCount
+      grassFeatureCount
       treeCount
       bushCount
       peopleCount

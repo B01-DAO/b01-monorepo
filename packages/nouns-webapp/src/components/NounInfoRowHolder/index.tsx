@@ -30,7 +30,8 @@ const NounInfoRowHolder: React.FC<NounInfoRowHolderProps> = (props: any) => {
       </div>
     );
   } else if (error) {
-    return <div>Failed to fetch noun info</div>;
+    console.error('WTF IS THIS', error);
+    return <div>errpor</div>;
   }
 
   const shortAddressComponent = <ShortAddress address={data && data.noun.owner.id} />;
