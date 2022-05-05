@@ -103,7 +103,7 @@ const selectProposalText = (proposal: Proposal) => {
   }
 };
 
-const NounProfileVoteRow: React.FC<NounProfileVoteRowProps> = props => {
+const NounProfileVoteRow: React.FC<NounProfileVoteRowProps> = (props: any) => {
   const { proposal, vote } = props;
 
   const history = useHistory();

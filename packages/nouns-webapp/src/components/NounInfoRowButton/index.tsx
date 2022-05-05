@@ -9,7 +9,7 @@ interface NounInfoRowButtonProps {
   onClickHandler: () => void;
 }
 
-const NounInfoRowButton: React.FC<NounInfoRowButtonProps> = props => {
+const NounInfoRowButton: React.FC<NounInfoRowButtonProps> = (props: any) => {
   const { iconImgSource, btnText, onClickHandler } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   return (

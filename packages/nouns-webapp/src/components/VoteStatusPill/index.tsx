@@ -5,7 +5,7 @@ interface VoteStatusPillProps {
   text: string;
 }
 
-const VoteStatusPill: React.FC<VoteStatusPillProps> = props => {
+const VoteStatusPill: React.FC<VoteStatusPillProps> = (props: any) => {
   const { status, text } = props;
   switch (status) {
     case 'success':

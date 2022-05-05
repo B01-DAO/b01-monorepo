@@ -16,7 +16,7 @@ interface NounInfoRowHolderProps {
   nounId: number;
 }
 
-const NounInfoRowHolder: React.FC<NounInfoRowHolderProps> = props => {
+const NounInfoRowHolder: React.FC<NounInfoRowHolderProps> = (props: any) => {
   const { nounId } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   const { loading, error, data } = useQuery(nounQuery(nounId.toString()));

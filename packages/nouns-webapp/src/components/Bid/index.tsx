@@ -1,5 +1,7 @@
 import { Auction, AuctionHouseContractFunction } from '../../wrappers/nounsAuction';
-import { connectContractToSigner, useEthers, useContractFunction } from '@usedapp/core';
+import { useEthers, useContractFunction, TransactionOptions } from '@usedapp/core';
+import { Contract } from '@ethersproject/contracts';
+import { JsonRpcProvider } from '@ethersproject/providers';
 import { useAppSelector } from '../../hooks';
 import React, { useEffect, useState, useRef, ChangeEvent, useCallback } from 'react';
 import { utils, BigNumber as EthersBN } from 'ethers';
@@ -13,6 +15,26 @@ import { NounsAuctionHouseFactory } from '@nouns/sdk';
 import config from '../../config';
 import WalletConnectModal from '../WalletConnectModal';
 import SettleManuallyBtn from '../SettleManuallyBtn';
+
+function connectContractToSigner(
+  contract: Contract,
+  options?: TransactionOptions,
+  library?: JsonRpcProvider,
+) {
+  if (contract.signer) {
+    return contract;
+  }
+
+  if (options?.signer) {
+    return contract.connect(options.signer);
+  }
+
+  if (library?.getSigner()) {
+    return contract.connect(library.getSigner());
+  }
+
+  throw new TypeError('No signer available in contract, options or library');
+}
 
 const computeMinimumNextBid = (
   currentBid: BigNumber,
@@ -44,7 +66,7 @@ const currentBid = (bidInputRef: React.RefObject<HTMLInputElement>) => {
 const Bid: React.FC<{
   auction: Auction;
   auctionEnded: boolean;
-}> = props => {
+}> = (props: any) => {
   const activeAccount = useAppSelector(state => state.account.activeAccount);
   const { library } = useEthers();
   let { auction, auctionEnded } = props;

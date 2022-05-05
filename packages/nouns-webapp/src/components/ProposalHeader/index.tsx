@@ -18,7 +18,7 @@ interface ProposalHeaderProps {
   submitButtonClickHandler: () => void;
 }
 
-const ProposalHeader: React.FC<ProposalHeaderProps> = props => {
+const ProposalHeader: React.FC<ProposalHeaderProps> = (props: any) => {
   const { proposal, isActiveForVoting, isWalletConnected, submitButtonClickHandler } = props;
 
   const isMobile = isMobileScreen();

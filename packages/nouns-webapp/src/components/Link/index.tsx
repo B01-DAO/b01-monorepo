@@ -1,6 +1,6 @@
 import classes from './Link.module.css';
 
-const Link: React.FC<{ text: string; url: string; leavesPage: boolean }> = props => {
+const Link: React.FC<{ text: string; url: string; leavesPage: boolean }> = (props: any) => {
   const { text, url, leavesPage } = props;
   return (
     <a

@@ -59,10 +59,18 @@ const DEFAULT_TRAIT_TYPE = 'heads';
 const encoder = new PNGCollectionEncoder(ImageData.palette);
 
 const traitKeyToTitle: Record<string, string> = {
-  heads: 'head',
-  glasses: 'glasses',
-  bodies: 'body',
-  accessories: 'accessory',
+  volumeCount: 'volumeCount',
+  maxVolumeHeight: 'maxVolumeHeight',
+  waterFeatureCount: 'waterFeatureCount',
+  grassFeatureCount: 'grassFeatureCount',
+  treeCount: 'treeCount',
+  bushCount: 'bushCount',
+  peopleCount: 'peopleCount',
+  timeOfDay: 'timeOfDay',
+  season: 'season',
+  greenRooftopP: 'greenRooftopP',
+  siteEdgeOffset: 'siteEdgeOffset',
+  orientation: 'orientation',
 };
 
 const parseTraitName = (partName: string): string =>
@@ -99,7 +107,21 @@ const Playground: React.FC = () => {
   );
 
   useEffect(() => {
-    const traitTitles = ['background', 'body', 'accessory', 'head', 'glasses'];
+    const traitTitles = [
+      'volumeCount',
+      'maxVolumeHeight',
+      'waterFeatureCount',
+      'grassFeatureCount',
+      'treeCount',
+      'bushCount',
+      'peopleCount',
+      'timeOfDay',
+      'season',
+      'greenRooftopP',
+      'siteEdgeOffset',
+      'orientation',
+    ];
+
     const traitNames = [
       ['cool', 'warm'],
       ...Object.values(ImageData.images).map(i => {

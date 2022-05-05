@@ -8,7 +8,7 @@ interface WalletConnectButtonProps {
   buttonStyle: NavBarButtonStyle;
 }
 
-const WalletConnectButton: React.FC<WalletConnectButtonProps> = props => {
+const WalletConnectButton: React.FC<WalletConnectButtonProps> = (props: any) => {
   const { className, onClickHandler, buttonStyle } = props;
   return (
     <Nav.Link className={className} onClick={onClickHandler}>

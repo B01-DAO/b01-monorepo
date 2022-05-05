@@ -1,7 +1,8 @@
 import { useContractCall, useEthers } from '@usedapp/core';
-import { BigNumber as EthersBN, utils } from 'ethers';
+import { BigNumber as EthersBN, BigNumberish, utils } from 'ethers';
 import { NounsTokenABI } from '@nouns/contracts';
 import config from '../config';
+import { fetchFromIpfs } from '../utils/fetchFromIpfs';
 
 interface NounToken {
   name: string;
@@ -10,32 +11,38 @@ interface NounToken {
 }
 
 export interface INounSeed {
-  accessory: number;
-  background: number;
-  body: number;
-  glasses: number;
-  head: number;
+  volumeCount: number;
+  maxVolumeHeight: number;
+  waterFeatureCount: number;
+  grassFeatureCount: number;
+  treeCount: number;
+  bushCount: number;
+  peopleCount: number;
+  timeOfDay: number;
+  season: number;
+  greenRooftopP: number;
+  siteEdgeOffset: BigNumberish;
+  orientation: BigNumberish;
 }
 
 const abi = new utils.Interface(NounsTokenABI);
 
-export const useNounToken = (nounId: EthersBN) => {
-  const [noun] =
+export const useNounToken = async (nounId: EthersBN): Promise<NounToken | undefined> => {
+  const [tokenUri] =
     useContractCall<[string]>({
       abi,
       address: config.addresses.nounsToken,
-      method: 'dataURI',
+      method: 'tokenURI',
       args: [nounId],
     }) || [];
 
-  if (!noun) {
+  if (!tokenUri) {
     return;
   }
 
-  const nounImgData = noun.split(';base64,').pop() as string;
-  const json: NounToken = JSON.parse(atob(nounImgData));
+  const json = await fetchFromIpfs(tokenUri);
 
-  return json;
+  return json as NounToken;
 };
 
 export const useNounSeed = (nounId: EthersBN) => {

@@ -39,7 +39,7 @@ const logo = (walletType: WALLET_TYPE) => {
   }
 };
 
-const WalletButton: React.FC<{ onClick: () => void; walletType: WALLET_TYPE }> = props => {
+const WalletButton: React.FC<{ onClick: () => void; walletType: WALLET_TYPE }> = (props: any) => {
   const { onClick, walletType } = props;
 
   return (

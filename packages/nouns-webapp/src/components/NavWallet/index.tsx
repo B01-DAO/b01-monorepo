@@ -36,7 +36,7 @@ type CustomMenuProps = {
   labeledBy?: string;
 };
 
-const NavWallet: React.FC<NavWalletProps> = props => {
+const NavWallet: React.FC<NavWalletProps> = (props: any) => {
   const { address, buttonStyle } = props;
 
   const [buttonUp, setButtonUp] = useState(false);

@@ -1,7 +1,9 @@
 import { BigNumber } from 'ethers';
 import classes from './AuctionActivityNounTitle.module.css';
 
-const AuctionActivityNounTitle: React.FC<{ nounId: BigNumber; isCool?: boolean }> = props => {
+const AuctionActivityNounTitle: React.FC<{ nounId: BigNumber; isCool?: boolean }> = (
+  props: any,
+) => {
   const { nounId, isCool } = props;
   const nounIdContent = `Noun ${nounId.toString()}`;
   return (

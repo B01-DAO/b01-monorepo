@@ -52,7 +52,7 @@ interface ProposalStateProps {
   className?: string;
 }
 
-const ProposalStatus: React.FC<ProposalStateProps> = props => {
+const ProposalStatus: React.FC<ProposalStateProps> = (props: any) => {
   const { status, className } = props;
   return (
     <div className={clsx(statusVariant(status), classes.proposalStatus, className)}>

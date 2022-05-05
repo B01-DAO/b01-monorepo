@@ -19,7 +19,7 @@ interface VoteCardProps {
   variant: VoteCardVariant;
 }
 
-const VoteCard: React.FC<VoteCardProps> = props => {
+const VoteCard: React.FC<VoteCardProps> = (props: any) => {
   const { proposal, percentage, nounIds, variant } = props;
   const isMobile = isMobileScreen();
 

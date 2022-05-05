@@ -16,7 +16,9 @@ export const BID_N_A = 'n/a';
  */
 type BidNa = typeof BID_N_A;
 
-const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolean }> = props => {
+const CurrentBid: React.FC<{ currentBid: BigNumber | BidNa; auctionEnded: boolean }> = (
+  props: any,
+) => {
   const { currentBid, auctionEnded } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   const titleContent = auctionEnded ? 'Winning bid' : 'Current bid';

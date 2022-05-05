@@ -12,7 +12,7 @@ const NOUNS_PER_VOTE_CARD_DESKTOP = 15;
 
 const isXLScreen = window.innerWidth > 1200;
 
-const NounImageVoteTable: React.FC<NounImageVoteTableProps> = props => {
+const NounImageVoteTable: React.FC<NounImageVoteTableProps> = (props: any) => {
   const { nounIds, propId } = props;
 
   const shuffledNounIds = pseudoRandomPredictableShuffle(nounIds, propId);

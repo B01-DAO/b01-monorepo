@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BigNumberish } from 'ethers';
 import * as R from 'ramda';
 import config from '../src/config';
 import { bigNumbersEqual } from './utils';
@@ -9,11 +10,18 @@ export interface NormalizedVote {
 }
 
 export interface Seed {
-  background: number;
-  body: number;
-  accessory: number;
-  head: number;
-  glasses: number;
+  volumeCount: number;
+  maxVolumeHeight: number;
+  waterFeatureCount: number;
+  grassFeatureCount: number;
+  treeCount: number;
+  bushCount: number;
+  peopleCount: number;
+  timeOfDay: number;
+  season: number;
+  greenRooftopP: number;
+  siteEdgeOffset: BigNumberish;
+  orientation: BigNumberish;
 }
 
 export interface NormalizedNoun {
@@ -41,11 +49,18 @@ const nounsGql = `
       supportDetailed
     }
     seed {
-      background
-      body
-      accessory
-      head
-      glasses
+      volumeCount
+      maxVolumeHeight
+      waterFeatureCount
+      grassFeatureCount
+      treeCount
+      bushCount
+      peopleCount
+      timeOfDay
+      season
+      greenRooftopP
+      siteEdgeOffset
+      orientation
     }
   }
 }
@@ -57,11 +72,18 @@ export const normalizeVote = (vote: any): NormalizedVote => ({
 });
 
 export const normalizeSeed = (seed: any): Seed => ({
-  background: Number(seed.background),
-  body: Number(seed.body),
-  glasses: Number(seed.glasses),
-  accessory: Number(seed.accessory),
-  head: Number(seed.head),
+  volumeCount: Number(seed.volumeCount),
+  maxVolumeHeight: Number(seed.maxVolumeHeight),
+  waterFeatureCount: Number(seed.waterFeatureCount),
+  grassFeatureCount: Number(seed.grassFeatureCount),
+  treeCount: Number(seed.treeCount),
+  bushCount: Number(seed.bushCount),
+  peopleCount: Number(seed.peopleCount),
+  timeOfDay: Number(seed.timeOfDay),
+  season: Number(seed.season),
+  greenRooftopP: Number(seed.greenRooftopP),
+  siteEdgeOffset: seed.siteEdgeOffset,
+  orientation: seed.orientation,
 });
 
 export const normalizeNoun = (noun: any): NormalizedNoun => ({

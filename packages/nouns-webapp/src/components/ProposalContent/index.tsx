@@ -31,7 +31,7 @@ const transactionLink = (content: string) => {
   );
 };
 
-const ProposalContent: React.FC<ProposalContentProps> = props => {
+const ProposalContent: React.FC<ProposalContentProps> = (props: any) => {
   const { proposal } = props;
 
   return (
@@ -52,13 +52,13 @@ const ProposalContent: React.FC<ProposalContentProps> = props => {
         <Col className={classes.section}>
           <h5>Proposed Transactions</h5>
           <ol>
-            {proposal?.details?.map((d, i) => {
+            {proposal?.details?.map((d: any, i: any) => {
               return (
                 <li key={i} className="m-0">
                   {linkIfAddress(d.target)}.{d.functionSig}
                   {d.value}(
                   <br />
-                  {d.callData.split(',').map((content, i) => {
+                  {d.callData.split(',').map((content: any, i: any) => {
                     return (
                       <Fragment key={i}>
                         <span key={i}>

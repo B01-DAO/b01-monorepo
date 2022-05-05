@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { utils } from 'ethers';
 import { Interface } from 'ethers/lib/utils';
 import { ChangeEvent, useState } from 'react';

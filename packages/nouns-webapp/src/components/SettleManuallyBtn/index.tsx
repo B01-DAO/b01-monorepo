@@ -9,7 +9,7 @@ import { CHAIN_ID } from '../../config';
 const SettleManuallyBtn: React.FC<{
   settleAuctionHandler: () => void;
   auction: Auction;
-}> = props => {
+}> = (props: any) => {
   const { settleAuctionHandler, auction } = props;
 
   const MINS_TO_ENABLE_MANUAL_SETTLEMENT = 5;

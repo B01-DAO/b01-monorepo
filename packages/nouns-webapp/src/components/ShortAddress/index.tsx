@@ -8,7 +8,9 @@ export const useShortAddress = (address: string) => {
   return address && [address.substr(0, 4), address.substr(38, 4)].join('...');
 };
 
-const ShortAddress: React.FC<{ address: string; avatar?: boolean; size?: number }> = props => {
+const ShortAddress: React.FC<{ address: string; avatar?: boolean; size?: number }> = (
+  props: any,
+) => {
   const { address, avatar, size = 24 } = props;
   const { library: provider } = useEthers();
 

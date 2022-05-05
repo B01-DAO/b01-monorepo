@@ -22,7 +22,7 @@ const NounderNounContent: React.FC<{
   isLastAuction: boolean;
   onPrevAuctionClick: () => void;
   onNextAuctionClick: () => void;
-}> = props => {
+}> = (props: any) => {
   const {
     mintTimestamp,
     nounId,

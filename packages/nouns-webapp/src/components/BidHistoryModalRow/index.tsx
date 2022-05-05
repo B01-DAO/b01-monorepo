@@ -28,7 +28,7 @@ const shortENS = (ens: string) => {
   return [ens.substr(0, 4), ens.substr(ens.length - 8, 8)].join('...');
 };
 
-const BidHistoryModalRow: React.FC<BidHistoryModalRowProps> = props => {
+const BidHistoryModalRow: React.FC<BidHistoryModalRowProps> = (props: any) => {
   const { bid, index } = props;
   const txLink = buildEtherscanTxLink(bid.transactionHash);
   const { library: provider } = useEthers();

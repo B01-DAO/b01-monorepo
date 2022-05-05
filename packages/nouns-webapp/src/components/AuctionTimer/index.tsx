@@ -12,7 +12,7 @@ dayjs.extend(duration);
 const AuctionTimer: React.FC<{
   auction: Auction;
   auctionEnded: boolean;
-}> = props => {
+}> = (props: any) => {
   const { auction, auctionEnded } = props;
 
   const [auctionTimer, setAuctionTimer] = useState(0);

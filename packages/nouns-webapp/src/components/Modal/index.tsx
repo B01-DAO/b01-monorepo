@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import xIcon from '../../assets/x-icon.png';
 import React from 'react';
 
-export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
+export const Backdrop: React.FC<{ onDismiss: () => void }> = (props: any) => {
   return <div className={classes.backdrop} onClick={props.onDismiss} />;
 };
 
@@ -11,7 +11,7 @@ const ModalOverlay: React.FC<{
   title?: string;
   content?: React.ReactNode;
   onDismiss: () => void;
-}> = props => {
+}> = (props: any) => {
   const { title, content, onDismiss } = props;
   return (
     <div className={classes.modal}>
@@ -28,7 +28,7 @@ const Modal: React.FC<{
   title?: string;
   content?: React.ReactNode;
   onDismiss: () => void;
-}> = props => {
+}> = (props: any) => {
   const { title, content, onDismiss } = props;
   return (
     <>

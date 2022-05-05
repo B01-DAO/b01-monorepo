@@ -28,7 +28,7 @@ export interface NounVoteHistory {
   supportDetailed: number;
 }
 
-const ProfileActivityFeed: React.FC<ProfileActivityFeedProps> = props => {
+const ProfileActivityFeed: React.FC<ProfileActivityFeedProps> = (props: any) => {
   const { nounId } = props;
 
   const MAX_EVENTS_SHOW_ABOVE_FOLD = 5;

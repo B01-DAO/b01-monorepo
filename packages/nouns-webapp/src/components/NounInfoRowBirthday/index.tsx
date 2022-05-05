@@ -13,7 +13,7 @@ interface NounInfoRowBirthdayProps {
   nounId: number;
 }
 
-const NounInfoRowBirthday: React.FC<NounInfoRowBirthdayProps> = props => {
+const NounInfoRowBirthday: React.FC<NounInfoRowBirthdayProps> = (props: any) => {
   const { nounId } = props;
 
   // If the noun is a nounder noun, use the next noun to get the mint date.

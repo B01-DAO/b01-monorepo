@@ -49,7 +49,7 @@ export const getNavBarButtonVariant = (buttonStyle?: NavBarButtonStyle) => {
   }
 };
 
-const NavBarButton: React.FC<NavBarButtonProps> = props => {
+const NavBarButton: React.FC<NavBarButtonProps> = (props: any) => {
   const { buttonText, buttonIcon, buttonStyle } = props;
 
   return (

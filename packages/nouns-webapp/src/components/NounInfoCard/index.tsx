@@ -19,7 +19,7 @@ interface NounInfoCardProps {
   bidHistoryOnClickHandler: () => void;
 }
 
-const NounInfoCard: React.FC<NounInfoCardProps> = props => {
+const NounInfoCard: React.FC<NounInfoCardProps> = (props: any) => {
   const { nounId, bidHistoryOnClickHandler } = props;
 
   const etherscanBaseURL = buildEtherscanAddressLink(config.addresses.nounsToken);

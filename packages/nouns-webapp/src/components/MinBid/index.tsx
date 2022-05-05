@@ -3,7 +3,7 @@ import classes from './MinBid.module.css';
 import BigNumber from 'bignumber.js';
 import TruncatedAmount from '../TruncatedAmount';
 
-const MinBid: React.FC<{ minBid: BigNumber; onClick: () => void }> = props => {
+const MinBid: React.FC<{ minBid: BigNumber; onClick: () => void }> = (props: any) => {
   const { minBid, onClick } = props;
 
   return (

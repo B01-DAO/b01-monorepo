@@ -11,7 +11,7 @@ import { FortmaticConnector } from '@web3-react/fortmatic-connector';
 import config, { CHAIN_ID } from '../../config';
 import classes from './WalletConnectModal.module.css';
 
-const WalletConnectModal: React.FC<{ onDismiss: () => void }> = props => {
+const WalletConnectModal: React.FC<{ onDismiss: () => void }> = (props: any) => {
   const { onDismiss } = props;
   const { activate } = useEthers();
   const supportedChainIds = [CHAIN_ID];

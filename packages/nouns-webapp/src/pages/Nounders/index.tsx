@@ -81,7 +81,7 @@ const BioCard: React.FC<{
   description?: string | undefined;
   image: string;
   handle?: string | undefined;
-}> = props => {
+}> = (props: any) => {
   const { name, description, image, handle } = props;
   return (
     <>
@@ -112,7 +112,7 @@ const BioCard: React.FC<{
   );
 };
 
-const BioCards: React.FC<{ min: number; max: number }> = props => {
+const BioCards: React.FC<{ min: number; max: number }> = (props: any) => {
   const { min, max } = props;
   return (
     <>

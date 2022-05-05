@@ -2,7 +2,7 @@ import bidBtnClasses from './BidHistoryBtn.module.css';
 
 import { useAppSelector } from '../../hooks';
 
-const BidHistoryBtn: React.FC<{ onClick: () => void }> = props => {
+const BidHistoryBtn: React.FC<{ onClick: () => void }> = (props: any) => {
   const { onClick } = props;
 
   const isCool = useAppSelector(state => state.application.stateBackgroundColor) === '#d5d7e1';

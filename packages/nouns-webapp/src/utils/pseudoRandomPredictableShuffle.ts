@@ -17,6 +17,7 @@ export const pseudoRandomPredictableShuffle = (input: Array<any> = [], seed: num
     let rand = Math.sin(seed++) * 10000;
     rand -= Math.floor(rand);
     const index = Math.floor(input.length * rand);
+    // @ts-ignore
     output.push(input[index]);
     input.splice(index, 1);
   }

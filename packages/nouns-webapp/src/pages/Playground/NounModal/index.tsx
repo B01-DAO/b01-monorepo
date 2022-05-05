@@ -13,7 +13,7 @@ const downloadNounPNG = (png: string) => {
   downloadEl.click();
 };
 
-const NounModal: React.FC<{ onDismiss: () => void; svg: string }> = props => {
+const NounModal: React.FC<{ onDismiss: () => void; svg: string }> = (props: any) => {
   const { onDismiss, svg } = props;
 
   const [width, setWidth] = useState<number>(window.innerWidth);

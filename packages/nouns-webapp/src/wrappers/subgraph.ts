@@ -55,12 +55,18 @@ export const auctionQuery = (auctionId: number) => gql`
 	  noun {
 		id
 		seed {
-		  id
-		  background
-		  body
-		  accessory
-		  head
-		  glasses
+      volumeCount
+      maxVolumeHeight
+      waterFeatureCoun
+      grassFeatureCoun
+      treeCount
+      bushCount
+      peopleCount
+      timeOfDay
+      season
+      greenRooftopP
+      siteEdgeOffset
+      orientation
 		}
 		owner {
 		  id
@@ -99,12 +105,19 @@ export const nounQuery = (id: string) => gql`
 	noun(id:"${id}") {
 	  id
 	  seed {
-	  background
-		body
-		accessory
-		head
-		glasses
-	}
+      volumeCount
+      maxVolumeHeight
+      waterFeatureCoun
+      grassFeatureCoun
+      treeCount
+      bushCount
+      peopleCount
+      timeOfDay
+      season
+      greenRooftopP
+      siteEdgeOffset
+      orientation
+	  }
 	  owner {
 		id
 	  }

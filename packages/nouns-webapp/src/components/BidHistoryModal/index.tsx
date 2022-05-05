@@ -8,14 +8,14 @@ import { useAuctionBids } from '../../wrappers/onDisplayAuction';
 import { Bid } from '../../utils/types';
 import BidHistoryModalRow from '../BidHistoryModalRow';
 
-export const Backdrop: React.FC<{ onDismiss: () => void }> = props => {
+export const Backdrop: React.FC<{ onDismiss: () => void }> = (props: any) => {
   return <div className={classes.backdrop} onClick={props.onDismiss} />;
 };
 
 const BidHistoryModalOverlay: React.FC<{
   auction: Auction;
   onDismiss: () => void;
-}> = props => {
+}> = (props: any) => {
   const { onDismiss, auction } = props;
 
   const bids = useAuctionBids(auction.nounId);
@@ -60,7 +60,7 @@ const BidHistoryModalOverlay: React.FC<{
 const BidHistoryModal: React.FC<{
   auction: Auction;
   onDismiss: () => void;
-}> = props => {
+}> = (props: any) => {
   const { onDismiss, auction } = props;
   return (
     <>

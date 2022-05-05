@@ -5,7 +5,7 @@ import classes from './VoteProgressBar.module.css';
 const VoteProgresBar: React.FC<{
   variant: VoteCardVariant;
   percentage: number;
-}> = props => {
+}> = (props: any) => {
   const { variant, percentage } = props;
 
   let progressBarClass;

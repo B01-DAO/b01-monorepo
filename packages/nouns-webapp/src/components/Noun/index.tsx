@@ -16,16 +16,11 @@ const Noun: React.FC<{
   alt: string;
   className?: string;
   wrapperClassName?: string;
-}> = props => {
+}> = (props: any) => {
   const { imgPath, alt, className, wrapperClassName } = props;
   return (
     <div className={`${classes.imgWrapper} ${wrapperClassName}`}>
-      <Image
-        className={`${classes.img} ${className}`}
-        src={imgPath ? imgPath : loadingNoun}
-        alt={alt}
-        fluid
-      />
+      <Image className={`${classes.img} ${className}`} src={loadingNoun} alt={alt} fluid />
     </div>
   );
 };

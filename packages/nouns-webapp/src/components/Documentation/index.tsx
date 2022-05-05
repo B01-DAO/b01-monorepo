@@ -115,11 +115,18 @@ const Documentation = () => {
                 equally rare. As of this writing, Nouns are made up of:
               </p>
               <ul>
-                <li>backgrounds (2) </li>
-                <li>bodies (30)</li>
-                <li>accessories (137) </li>
-                <li>heads (234) </li>
-                <li>glasses (21)</li>
+                <li> volumeCount </li>
+                <li> maxVolumeHeight </li>
+                <li> waterFeatureCount </li>
+                <li> grassFeatureCount </li>
+                <li> treeCount </li>
+                <li> bushCount </li>
+                <li> peopleCount </li>
+                <li> timeOfDay </li>
+                <li> season </li>
+                <li> greenRooftopP </li>
+                <li> siteEdgeOffset </li>
+                <li> orientation </li>
               </ul>
               You can experiment with off-chain Noun generation at the {playgroundLink}.
             </Accordion.Body>

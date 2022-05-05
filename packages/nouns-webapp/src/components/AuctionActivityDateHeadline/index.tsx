@@ -6,7 +6,7 @@ import { useAppSelector } from '../../hooks';
 
 dayjs.extend(utc);
 
-const AuctionActivityDateHeadline: React.FC<{ startTime: BigNumber }> = props => {
+const AuctionActivityDateHeadline: React.FC<{ startTime: BigNumber }> = (props: any) => {
   const { startTime } = props;
   const isCool = useAppSelector(state => state.application.isCoolBackground);
   const auctionStartTimeUTC = dayjs(startTime.toNumber() * 1000)
