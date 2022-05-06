@@ -11,11 +11,11 @@
     "encode": "ts-node scripts/encode.ts",
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "build": "tsc -p tsconfig.build.json",
-    "prepare": "yarn build",
+    "prepare": "pnpm build",
     "test": "mocha -r ts-node/register \"test/**/*.test.ts\""
   },
   "devDependencies": {
-    "@nouns/sdk": "^0.1.4",
+    "@nouns/sdk": "workspace:../nouns-sdk",
     "@types/pngjs": "^6.0.1",
     "chai": "^4.2.0",
     "mocha": "^8.4.0",
