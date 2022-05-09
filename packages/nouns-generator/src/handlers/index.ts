@@ -1,0 +1,1 @@
+export { generateSafe } from './generate';

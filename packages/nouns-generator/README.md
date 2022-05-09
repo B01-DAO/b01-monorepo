@@ -5,11 +5,11 @@ A web3 listener and HTTP server that support generating Noun assets on minting, 
 ## Install dependencies
 
 ```sh
-yarn
+pnpm
 ```
 
 ## Start API (Development)
 
 ```sh
-yarn dev
+pnpm dev
 ```

@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@nouns/contracts": "workspace:../nouns-contracts",
+    "@nouns/sdk": "workspace:../nouns-sdk",
     "dotenv": "^8.2.0",
     "ethers": "^5.4.0",
     "express": "^4.17.1",

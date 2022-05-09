@@ -1,6 +1,7 @@
 import express, { Express, Request } from 'express';
 import { param, validationResult } from 'express-validator';
-import generate from './generate';
+import { generateSafe } from './handlers';
+import { startListener, stopListener } from './listener';
 
 /**
  * Create the express app and attach routes
@@ -43,7 +44,7 @@ export const createAPI = (): Express => {
         orientation: '99040878704',
       };
 
-      generate(tokenId, tokenSeed);
+      generateSafe(tokenId, tokenSeed);
 
       res.status(200).send({
         message: 'Generating...',
@@ -58,6 +59,21 @@ export const createAPI = (): Express => {
     // 1. Query subgraph for Noun without uri
     // 2. Check if generation is happening
     // 3. Run job
+  });
+
+  app.post('/startListener', param('start').isBoolean(), async (req: Request, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+    const start = req.params.start;
+    console.log(`${start ? 'Starting' : 'Stopping'} listener`);
+
+    if (start) {
+      startListener();
+    } else {
+      stopListener();
+    }
   });
 
   return app;

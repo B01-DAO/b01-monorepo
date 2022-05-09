@@ -1,17 +1,23 @@
 import type { NounSeed, NounMetadata } from '@nouns/sdk';
 import { tryF, isError } from 'ts-try';
 import { File } from 'nft.storage';
-import { storage, nounsTokenContract } from './clients';
+import { storage, nounsTokenContract } from '../clients';
 import { Wallet } from 'ethers';
+
+// B01 TODO: where should this be stored?
+const TEMP_NOUNS_HASH = 'QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
 
 export interface NounUploadMetadata {
   name: string;
   description: string;
-  image: typeof File;
   background_color: string;
+  external_url: string;
+  image: typeof File;
   animation_url: typeof File;
   animation_data: typeof File;
 }
+
+let activeJob: number | undefined = undefined;
 
 /**
  * Generate assets for a provided seed, upload them to IPFS, and update the contract.
@@ -28,10 +34,12 @@ const generate = async (nounId: number, seed: NounSeed) => {
   const webmFile = new File([webm], `${nounId}.webm`, { type: 'video/webm' });
 
   // construct metadata
+  // B01 TODO: update payload
   const metadata: NounUploadMetadata = {
     name: `Noun ${nounId}`,
     description: `Noun ${nounId} is a member of the Nouns DAO`,
     image: imageFile,
+    external_url: `https://nouns.wtf/noun/${nounId}`,
     animation_url: webmFile,
     animation_data: gltfFile,
     background_color: '#ffffff',
@@ -42,6 +50,7 @@ const generate = async (nounId: number, seed: NounSeed) => {
   const cid = await tryF(() => storage.store(metadata));
   if (isError(cid)) {
     console.error(`Error uploading metadata for token ID ${nounId}: ${cid.message}`);
+    // TODO: consider storing assets somewhere
     return;
   }
   const tokenUri = cid.url;
@@ -69,8 +78,35 @@ const generate = async (nounId: number, seed: NounSeed) => {
  */
 const generateSafe = async (nounId: number, seed: NounSeed) => {
   // confirm a job isn't already generatening for this noun
+  if (activeJob === nounId) {
+    console.error(
+      `Skipping generation for noun ${nounId} because another job is already running for it`,
+    );
+    return;
+  }
+
+  if (activeJob !== undefined) {
+    console.error(
+      `Skipping generation for noun ${nounId} because another job is already running for another noun: ${activeJob}`,
+    );
+    return;
+  }
+
   // read the contract and confirm tokenURI is not already set
-  generate(nounId, seed);
+  const tokenUri = await tryF(() => nounsTokenContract.tokenURI(nounId));
+  if (tokenUri?.length > 0 && tokenUri !== TEMP_NOUNS_HASH) {
+    console.error("Skipping generation for noun ${nounId} because it's already set");
+    return;
+  }
+
+  // read seed from contract and sanity check
+
+  // lock
+  activeJob = nounId;
+  // run
+  await generate(nounId, seed);
+  // release lock
+  activeJob = undefined;
 };
 
-export default generateSafe;
+export { generateSafe };
