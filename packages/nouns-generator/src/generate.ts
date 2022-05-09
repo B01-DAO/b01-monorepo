@@ -20,38 +20,36 @@ export interface NounUploadMetadata {
  * @param seed
  */
 const generate = async (nounId: number, seed: NounSeed) => {
-  // // generate assets
-  // const [image, gltf, webm] = ['', '', ''];
+  // generate assets
+  const [image, gltf, webm] = ['', '', ''];
 
-  // const imageFile = new File([image], `${nounId}.png`, { type: 'image/png' });
-  // const gltfFile = new File([gltf], `${nounId}.gltf`, { type: 'model/gltf' });
-  // const webmFile = new File([webm], `${nounId}.webm`, { type: 'video/webm' });
+  const imageFile = new File([image], `${nounId}.png`, { type: 'image/png' });
+  const gltfFile = new File([gltf], `${nounId}.gltf`, { type: 'model/gltf' });
+  const webmFile = new File([webm], `${nounId}.webm`, { type: 'video/webm' });
 
-  // // construct metadata
-  // const metadata: NounUploadMetadata = {
-  //   name: `Noun ${nounId}`,
-  //   description: `Noun ${nounId} is a member of the Nouns DAO`,
-  //   image: imageFile,
-  //   animation_url: webmFile,
-  //   animation_data: gltfFile,
-  //   background_color: '#ffffff',
-  // };
+  // construct metadata
+  const metadata: NounUploadMetadata = {
+    name: `Noun ${nounId}`,
+    description: `Noun ${nounId} is a member of the Nouns DAO`,
+    image: imageFile,
+    animation_url: webmFile,
+    animation_data: gltfFile,
+    background_color: '#ffffff',
+  };
 
-  // // upload asset to IPFS
-  // // image, animation_url, and animation_data will be uploaded to IPFS as separate assets and attached
-  // const cid = await tryF(() => storage.store(metadata));
-  // if (isError(cid)) {
-  //   console.error(`Error uploading metadata for token ID ${nounId}: ${cid.message}`);
-  //   return;
-  // }
-  // const tokenUri = cid.url;
+  // upload asset to IPFS
+  // image, animation_url, and animation_data will be uploaded to IPFS as separate assets and attached
+  const cid = await tryF(() => storage.store(metadata));
+  if (isError(cid)) {
+    console.error(`Error uploading metadata for token ID ${nounId}: ${cid.message}`);
+    return;
+  }
+  const tokenUri = cid.url;
 
-  // console.log('Successfully uploaded metadata for token ID to IPFS', nounId, tokenUri);
+  console.log('Successfully uploaded metadata for token ID to IPFS', nounId, tokenUri);
 
   // update contract
   if (process.env.TOKEN_URI_PRIVATE_KEY) {
-    const tokenUri =
-      'ipfs://bafyreiaoafwxhbqusxrlztuvwnzajg54cbzvywhw4hlox2iuelezpwyvay/metadata.json';
     const signer = new Wallet(process.env.TOKEN_URI_PRIVATE_KEY, nounsTokenContract.provider);
     const upgradedContract = nounsTokenContract.connect(signer);
     const update = await tryF(() => upgradedContract.setTokenURI(nounId, tokenUri));
