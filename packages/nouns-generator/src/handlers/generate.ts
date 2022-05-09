@@ -1,11 +1,12 @@
-import type { NounSeed, NounMetadata } from '@nouns/sdk';
+import { NounSeed, NounMetadata, convertContractSeedToSeed } from '@nouns/sdk';
+import { INounsSeeder } from '@nouns/contracts/typechain-types/INounsToken';
 import { tryF, isError } from 'ts-try';
 import { File } from 'nft.storage';
 import { storage, nounsTokenContract } from '../clients';
 import { Wallet } from 'ethers';
 
 // B01 TODO: where should this be stored?
-const TEMP_NOUNS_HASH = 'QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
+const TEMP_NOUNS_HASH = 'ipfs://QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
 
 export interface NounUploadMetadata {
   name: string;
@@ -76,7 +77,7 @@ const generate = async (nounId: number, seed: NounSeed) => {
  * @param nounId
  * @param seed
  */
-const generateSafe = async (nounId: number, seed: NounSeed) => {
+const generateSafe = async (nounId: number, seed?: NounSeed) => {
   // confirm a job isn't already generatening for this noun
   if (activeJob === nounId) {
     console.error(
@@ -95,11 +96,31 @@ const generateSafe = async (nounId: number, seed: NounSeed) => {
   // read the contract and confirm tokenURI is not already set
   const tokenUri = await tryF(() => nounsTokenContract.tokenURI(nounId));
   if (tokenUri?.length > 0 && tokenUri !== TEMP_NOUNS_HASH) {
-    console.error("Skipping generation for noun ${nounId} because it's already set");
+    console.error(`Skipping generation for noun ${nounId} because it's already set: ${tokenUri}`);
     return;
   }
 
-  // read seed from contract and sanity check
+  // set seed if not provided
+  const cSeed: INounsSeeder.SeedStruct = await tryF(() => nounsTokenContract.seeds(nounId));
+  if (isError(seed)) {
+    console.error(`Error reading seed from contract for token ID ${nounId}: ${seed.message}`);
+    return;
+  }
+
+  if (!seed) {
+    seed = convertContractSeedToSeed(cSeed);
+  }
+
+  // sanity test
+  const seedDuplicate = convertContractSeedToSeed(cSeed);
+  if (JSON.stringify(seed) !== JSON.stringify(seedDuplicate)) {
+    console.error(
+      `Seed for token ID ${nounId} is not the same as the seed in the contract.`,
+      seed,
+      seedDuplicate,
+    );
+    return;
+  }
 
   // lock
   activeJob = nounId;

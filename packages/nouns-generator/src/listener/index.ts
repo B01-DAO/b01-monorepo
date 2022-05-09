@@ -30,7 +30,13 @@ const nounCreatedHandler = (nounId: BigNumber, seed: INounsSeeder.SeedStructOutp
 
 export const startListener = () => {
   if (nounsTokenContract.listenerCount('NounCreated') === 0) {
+    console.log('Starting event listener');
     nounsTokenContract.on('NounCreated', nounCreatedHandler);
+  } else {
+    console.log('Listener already started');
   }
 };
-export const stopListener = () => nounsTokenContract.removeAllListeners('NounCreated');
+export const stopListener = () => {
+  console.log('Stopping event listener');
+  nounsTokenContract.removeAllListeners('NounCreated');
+};

@@ -1,3 +1,4 @@
+import { BigNumber } from 'ethers';
 import express, { Express, Request } from 'express';
 import { param, validationResult } from 'express-validator';
 import { generateSafe } from './handlers';
@@ -27,24 +28,21 @@ export const createAPI = (): Express => {
       }
 
       console.log('Generating for token:', req.params.tokenId);
-
-      const tokenId = 0;
       const tokenSeed = {
-        volumeCount: 35,
+        volumeCount: 15,
         maxVolumeHeight: 6,
-        waterFeatureCount: 8,
-        grassFeatureCount: 8,
-        treeCount: 5,
-        bushCount: 67,
+        waterFeatureCount: 7,
+        grassFeatureCount: 5,
+        treeCount: 20,
+        bushCount: 54,
         peopleCount: 19,
-        timeOfDay: 1,
+        timeOfDay: 0,
         season: 2,
         greenRooftopP: 0,
-        siteEdgeOffset: '2731733726',
-        orientation: '99040878704',
+        siteEdgeOffset: BigNumber.from('1378562894'),
+        orientation: BigNumber.from('20885675686'),
       };
-
-      generateSafe(tokenId, tokenSeed);
+      generateSafe(Number(req.params.tokenId), tokenSeed);
 
       res.status(200).send({
         message: 'Generating...',
@@ -52,14 +50,14 @@ export const createAPI = (): Express => {
     },
   );
 
-  app.post('/pollAndGenerate', async (req: Request, res) => {
-    console.log('Querying for latest Noun without uri');
+  // app.post('/pollAndGenerate', async (req: Request, res) => {
+  //   console.log('Querying for latest Noun without uri');
 
-    // TODO:
-    // 1. Query subgraph for Noun without uri
-    // 2. Check if generation is happening
-    // 3. Run job
-  });
+  //   // TODO:
+  //   // 1. Query subgraph for Noun without uri
+  //   // 2. Check if generation is happening
+  //   // 3. Run job
+  // });
 
   app.post('/startListener', param('start').isBoolean(), async (req: Request, res) => {
     const errors = validationResult(req);

@@ -5,13 +5,13 @@
 ### Install dependencies
 
 ```sh
-yarn
+pnpm
 ```
 
 ### Run tests
 
 ```sh
-yarn test
+pnpm test
 ```
 
 ## Usage
