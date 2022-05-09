@@ -28,21 +28,7 @@ export const createAPI = (): Express => {
       }
 
       console.log('Generating for token:', req.params.tokenId);
-      const tokenSeed = {
-        volumeCount: 15,
-        maxVolumeHeight: 6,
-        waterFeatureCount: 7,
-        grassFeatureCount: 5,
-        treeCount: 20,
-        bushCount: 54,
-        peopleCount: 19,
-        timeOfDay: 0,
-        season: 2,
-        greenRooftopP: 0,
-        siteEdgeOffset: BigNumber.from('1378562894'),
-        orientation: BigNumber.from('20885675686'),
-      };
-      generateSafe(Number(req.params.tokenId), tokenSeed);
+      generateSafe(Number(req.params.tokenId));
 
       res.status(200).send({
         message: 'Generating...',
