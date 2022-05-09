@@ -9,7 +9,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "build": "yarn build:sol && yarn build:ts && yarn build:declarations",
+    "build": "pnpm build:sol && pnpm build:ts && pnpm build:declarations",
     "build:ts": "tsc -p tsconfig.build.json",
     "build:sol": "npx hardhat compile",
     "build:declarations": "shx cp typechain-types/*.d.ts dist/typechain-types",
@@ -21,9 +21,11 @@
     "task:run-local": "npx hardhat run-local",
     "test": "npx hardhat test",
     "coverage": "npx hardhat coverage",
-    "prepare": "yarn build"
+    "prepare": "pnpm build"
   },
   "devDependencies": {
+    "@ethersproject/abi": "^5.6.1",
+    "@ethersproject/providers": "^5.6.5",
     "@float-capital/solidity-coverage": "^0.7.17",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
