@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: 'rinkeby',
+  defaultNetwork: 'hardhat',
   networks: {
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,

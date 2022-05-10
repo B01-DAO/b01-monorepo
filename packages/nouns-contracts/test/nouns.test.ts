@@ -42,12 +42,12 @@ describe('NounsToken', () => {
     expect(await nounsToken.ownerOf(0)).to.eq(noundersDAO.address);
     expect(noundersNounCreated?.event).to.eq('NounCreated');
     expect(noundersNounCreated?.args?.tokenId).to.eq(0);
-    expect(noundersNounCreated?.args?.seed.length).to.equal(12);
+    expect(noundersNounCreated?.args?.seed.length).to.equal(13);
 
     expect(await nounsToken.ownerOf(1)).to.eq(deployer.address);
     expect(ownersNounCreated?.event).to.eq('NounCreated');
     expect(ownersNounCreated?.args?.tokenId).to.eq(1);
-    expect(ownersNounCreated?.args?.seed.length).to.equal(12);
+    expect(ownersNounCreated?.args?.seed.length).to.equal(13);
 
     noundersNounCreated?.args?.seed.forEach((item: EthersBN | number) => {
       const value = typeof item !== 'number' ? item?.toNumber() : item;
@@ -77,7 +77,7 @@ describe('NounsToken', () => {
     expect(await nounsToken.ownerOf(2)).to.eq(deployer.address);
     expect(nounCreated?.event).to.eq('NounCreated');
     expect(nounCreated?.args?.tokenId).to.eq(2);
-    expect(nounCreated?.args?.seed.length).to.equal(12);
+    expect(nounCreated?.args?.seed.length).to.equal(13);
 
     nounCreated?.args?.seed.forEach((item: EthersBN | number) => {
       const value = typeof item !== 'number' ? item?.toNumber() : item;
