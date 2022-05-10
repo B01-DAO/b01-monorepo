@@ -13,8 +13,9 @@ interface INounsDescriptor {
         uint8[2] treeCountRange;
         uint8[2] bushCountRange;
         uint8[2] peopleCountRange;
-        uint8[2] timeOfDayRange;
+        uint8[2] lightingRange;
         uint8[2] seasonRange;
+        uint8[2] environmentRange;
         uint8[2] greenRooftopPRange;
         uint256[2] siteEdgeOffsetRange;
         uint256[2] orientationRange;
@@ -39,8 +40,10 @@ interface INounsDescriptor {
     function getPeopleCountRange() external view returns (uint8[2] memory);
 
     function getTimeOfDayRange() external view returns (uint8[2] memory);
-    
+
     function getSeasonRange() external view returns (uint8[2] memory);
+
+    function getEnvironmentRange() external view returns (uint8[2] memory);
 
     function getGreenRooftopPRange() external view returns (uint8[2] memory);
 

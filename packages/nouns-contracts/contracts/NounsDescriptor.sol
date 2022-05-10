@@ -25,8 +25,9 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
             treeCountRange: [2, 20],
             bushCountRange: [0, 100],
             peopleCountRange: [5, 20],
-            timeOfDayRange: [0,2],
-            seasonRange:[0,3],
+            lightingRange: [0, 4],
+            seasonRange: [0, 3],
+            environmentRange: [0, 4],
             greenRooftopPRange: [0, 255],
             siteEdgeOffsetRange: [uint256(.1 * 1e10), uint256(.3 * 1e10)],
             orientationRange: [uint256(0 * 1e10), uint256(10 * 1e10)]
@@ -100,13 +101,21 @@ contract NounsDescriptor is INounsDescriptor, Ownable {
      * @dev Public getter for time of day range
      */
     function getTimeOfDayRange() external view override returns (uint8[2] memory) {
-        return attributeRanges.timeOfDayRange;
+        return attributeRanges.lightingRange;
     }
+
     /**
      * @dev Public getter for season range
      */
     function getSeasonRange() external view override returns (uint8[2] memory) {
         return attributeRanges.seasonRange;
+    }
+
+    /**
+     * @dev Public getter for environment range
+     */
+    function getEnvironmentRange() external view override returns (uint8[2] memory) {
+        return attributeRanges.environmentRange;
     }
 
     /**

@@ -122,8 +122,9 @@ const Documentation = () => {
                 <li> treeCount </li>
                 <li> bushCount </li>
                 <li> peopleCount </li>
-                <li> timeOfDay </li>
+                <li> lighting </li>
                 <li> season </li>
+                <li> environment </li>
                 <li> greenRooftopP </li>
                 <li> siteEdgeOffset </li>
                 <li> orientation </li>

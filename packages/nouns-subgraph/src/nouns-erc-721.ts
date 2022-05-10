@@ -21,8 +21,9 @@ export function handleNounCreated(event: NounCreated): void {
   seed.treeCount = event.params.seed.treeCount;
   seed.bushCount = event.params.seed.bushCount;
   seed.peopleCount = event.params.seed.peopleCount;
-  seed.timeOfDay = event.params.seed.timeOfDay;
+  seed.lighting = event.params.seed.lighting;
   seed.season = event.params.seed.season;
+  seed.environment = event.params.seed.environment;
   seed.greenRooftopP = event.params.seed.greenRooftopP;
   seed.siteEdgeOffset = event.params.seed.siteEdgeOffset;
   seed.orientation = event.params.seed.orientation;

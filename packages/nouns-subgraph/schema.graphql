@@ -16,9 +16,11 @@ type Seed @entity {
 
   peopleCount: Int!
 
-  timeOfDay: Int!
+  lighting: Int!
 
   season: Int!
+
+  environment: Int!
 
   greenRooftopP: Int!
 

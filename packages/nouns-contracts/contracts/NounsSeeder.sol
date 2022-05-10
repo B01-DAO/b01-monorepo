@@ -44,23 +44,29 @@ contract NounsSeeder is INounsSeeder {
 
         seed.peopleCount = randomUint8InRange(pr >> (16 * 6), ranges.peopleCountRange[0], ranges.peopleCountRange[1]);
 
-        seed.timeOfDay = randomUint8InRange(pr >> (16 * 7), ranges.timeOfDayRange[0], ranges.timeOfDayRange[1]);
+        seed.lighting = randomUint8InRange(pr >> (16 * 7), ranges.lightingRange[0], ranges.lightingRange[1]);
 
         seed.season = randomUint8InRange(pr >> (16 * 8), ranges.seasonRange[0], ranges.seasonRange[1]);
 
+        seed.environment = randomUint8InRange(pr >> (16 * 9), ranges.environmentRange[0], ranges.environmentRange[1]);
+
         seed.greenRooftopP = randomUint8InRange(
-            pr >> (16 * 9),
+            pr >> (16 * 10),
             ranges.greenRooftopPRange[0],
-            ranges.greenRooftopPRange[0]
+            ranges.greenRooftopPRange[1]
         );
 
         seed.siteEdgeOffset = randomUint256InRange(
-            pr >> (16 * 10),
+            pr >> (16 * 11),
             ranges.siteEdgeOffsetRange[0],
             ranges.siteEdgeOffsetRange[1]
         );
 
-        seed.orientation = randomUint256InRange(pr >> (16 * 11), ranges.orientationRange[0], ranges.orientationRange[1]);
+        seed.orientation = randomUint256InRange(
+            pr >> (16 * 12),
+            ranges.orientationRange[0],
+            ranges.orientationRange[1]
+        );
 
         return seed;
     }

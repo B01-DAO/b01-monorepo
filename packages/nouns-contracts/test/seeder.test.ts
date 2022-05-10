@@ -36,8 +36,9 @@ describe('NounsSeeder', () => {
       treeCountRange: tcR,
       bushCountRange: bcR,
       peopleCountRange: pcR,
-      timeOfDayRange: todR,
+      lightingRange: lR,
       seasonRange: sR,
+      environmentRange: eR,
       greenRooftopPRange: grpR,
       siteEdgeOffsetRange: seoR,
       orientationRange: oR,
@@ -50,8 +51,9 @@ describe('NounsSeeder', () => {
     expect(seed.treeCount).to.be.within(tcR[0], tcR[1]);
     expect(seed.bushCount).to.be.within(bcR[0], bcR[1]);
     expect(seed.peopleCount).to.be.within(pcR[0], pcR[1]);
-    expect(seed.timeOfDay).to.be.within(todR[0], todR[1]);
+    expect(seed.lighting).to.be.within(lR[0], lR[1]);
     expect(seed.season).to.be.within(sR[0], sR[1]);
+    expect(seed.environment).to.be.within(eR[0], eR[1]);
     expect(seed.greenRooftopP).to.be.within(grpR[0], grpR[1]);
 
     expect(Number(formatUnits(seed?.siteEdgeOffset, 10)))

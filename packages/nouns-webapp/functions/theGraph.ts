@@ -17,8 +17,9 @@ export interface Seed {
   treeCount: number;
   bushCount: number;
   peopleCount: number;
-  timeOfDay: number;
+  lighting: number;
   season: number;
+  environment: number;
   greenRooftopP: number;
   siteEdgeOffset: BigNumberish;
   orientation: BigNumberish;
@@ -56,8 +57,9 @@ const nounsGql = `
       treeCount
       bushCount
       peopleCount
-      timeOfDay
+      lighting
       season
+      environment
       greenRooftopP
       siteEdgeOffset
       orientation
@@ -79,8 +81,9 @@ export const normalizeSeed = (seed: any): Seed => ({
   treeCount: Number(seed.treeCount),
   bushCount: Number(seed.bushCount),
   peopleCount: Number(seed.peopleCount),
-  timeOfDay: Number(seed.timeOfDay),
+  lighting: Number(seed.lighting),
   season: Number(seed.season),
+  environment: Number(seed.environment),
   greenRooftopP: Number(seed.greenRooftopP),
   siteEdgeOffset: seed.siteEdgeOffset,
   orientation: seed.orientation,

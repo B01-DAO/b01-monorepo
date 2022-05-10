@@ -183,9 +183,11 @@ components:
           type: integer
         peopleCount:
           type: integer
-        timeOfDay:
+        lighting:
           type: integer
         season:
+          type: integer
+        environment:
           type: integer
         greenRooftopP:
           type: integer

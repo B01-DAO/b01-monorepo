@@ -62,8 +62,9 @@ export const auctionQuery = (auctionId: number) => gql`
       treeCount
       bushCount
       peopleCount
-      timeOfDay
+      lighting
       season
+      environment
       greenRooftopP
       siteEdgeOffset
       orientation
@@ -112,8 +113,9 @@ export const nounQuery = (id: string) => gql`
       treeCount
       bushCount
       peopleCount
-      timeOfDay
+      lighting
       season
+      environment
       greenRooftopP
       siteEdgeOffset
       orientation

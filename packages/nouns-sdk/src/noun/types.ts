@@ -8,8 +8,9 @@ export type NounSeed = {
   treeCount: number;
   bushCount: number;
   peopleCount: number;
-  timeOfDay: number;
+  lighting: number;
   season: number;
+  environment: number;
   greenRooftopP: number;
   siteEdgeOffset: BigNumberish;
   orientation: BigNumberish;

@@ -53,7 +53,7 @@
           },
           {
             "internalType": "uint8",
-            "name": "timeOfDay",
+            "name": "lighting",
             "type": "uint8"
           },
           {

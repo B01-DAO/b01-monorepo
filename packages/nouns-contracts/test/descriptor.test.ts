@@ -33,8 +33,9 @@ describe('NounsDescriptor', () => {
       treeCountRange: tcR,
       bushCountRange: bcR,
       peopleCountRange: pcR,
-      timeOfDayRange: todR,
+      lightingRange: lR,
       seasonRange: sR,
+      environmentRange: eR,
       greenRooftopPRange: grpR,
       siteEdgeOffsetRange: seoR,
       orientationRange: oR,
@@ -47,8 +48,9 @@ describe('NounsDescriptor', () => {
     expect(tcR).to.deep.equal([2, 20]);
     expect(bcR).to.deep.equal([0, 100]);
     expect(pcR).to.deep.equal([5, 20]);
-    expect(todR).to.deep.equal([0, 2]);
+    expect(lR).to.deep.equal([0, 4]);
     expect(sR).to.deep.equal([0, 3]);
+    expect(eR).to.deep.equal([0, 4]);
     expect(grpR).to.deep.equal([0, 255]);
 
     expect([Number(formatUnits(seoR[0], 10)), Number(formatUnits(seoR[1], 10))]).to.deep.eq([

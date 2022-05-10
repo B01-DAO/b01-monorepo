@@ -15,8 +15,9 @@ interface INounsSeeder {
         uint8 treeCount;
         uint8 bushCount;
         uint8 peopleCount;
-        uint8 timeOfDay;
+        uint8 lighting;
         uint8 season;
+        uint8 environment;
         uint8 greenRooftopP;
         uint256 siteEdgeOffset;
         uint256 orientation;

@@ -80,7 +80,7 @@
           },
           {
             "internalType": "uint8[2]",
-            "name": "timeOfDayRange",
+            "name": "lightingRange",
             "type": "uint8[2]"
           },
           {
