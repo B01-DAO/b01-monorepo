@@ -55,6 +55,12 @@ contract NounsToken is INounsToken, Ownable, ERC721URIStorage, ERC721Checkpointa
     // IPFS content hash of contract-level metadata
     string private _contractURIHash = 'QmZi1n79FqWt2tTLwCqiy6nLM6xLGRsEPQ5JmReJQKNNzX';
 
+    // 2 years in seconds
+    uint256 public _twoYears = 63072000 seconds;
+
+    // Mint expiration timestamp
+    uint256 public mintExpirationTimestamp;
+
     // OpenSea's Proxy Registry
     IProxyRegistry public immutable proxyRegistry;
 
@@ -128,6 +134,7 @@ contract NounsToken is INounsToken, Ownable, ERC721URIStorage, ERC721Checkpointa
         descriptor = _descriptor;
         seeder = _seeder;
         proxyRegistry = _proxyRegistry;
+        mintExpirationTimestamp = block.timestamp + _twoYears;
     }
 
     /**
@@ -184,10 +191,12 @@ contract NounsToken is INounsToken, Ownable, ERC721URIStorage, ERC721Checkpointa
     /**
      * @notice Mint a Noun to the minter, along with a possible nounders reward
      * Nouns. Nounders reward Nouns are minted every 10 Nouns, starting at 0,
-     * until 183 nounsder Nouns have been minted (5 years w/ 24 hour auctions).
+     * until 183 nounsder Nouns have been minted. Minting expires after 2 years.
      * @dev Call _mintTo with the to address(es).
      */
     function mint() public override onlyMinter returns (uint256) {
+        require(block.timestamp < mintExpirationTimestamp, 'Minting has expired');
+
         if (_currentNounsId <= 1820 && _currentNounsId % 10 == 0) {
             _mintTo(noundersDAO, _currentNounsId++);
         }

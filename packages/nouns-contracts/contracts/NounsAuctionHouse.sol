@@ -188,8 +188,8 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
     /**
      * @notice Create an auction.
      * @dev Store the auction details in the `auction` state variable and emit an AuctionCreated event.
-     * If the mint reverts, the minter was updated without pausing this contract first. To remedy this,
-     * catch the revert and pause this contract.
+     * If the mint reverts, the minter was updated without pausing this contract first, or minting has expired.
+     * To remedy this, catch the revert and pause this contract.
      */
     function _createAuction() internal {
         try nouns.mint() returns (uint256 nounId) {

@@ -113,6 +113,25 @@ describe('NounsToken', () => {
     await expect(account0AsNounErc721Account.mint()).to.be.reverted;
   });
 
+  it('should revert on mint after expiration', async () => {
+    const expirationTimestamp = await nounsToken.mintExpirationTimestamp();
+    await ethers.provider.send('evm_mine', [expirationTimestamp.toNumber()]);
+    await expect(nounsToken.mint()).to.be.reverted;
+  });
+
+  it('should support mint right before expiration', async () => {
+    const expirationTimestamp = await nounsToken.mintExpirationTimestamp();
+    await ethers.provider.send('evm_mine', [expirationTimestamp.toNumber() - 10]);
+
+    const receipt = await (await nounsToken.mint()).wait();
+
+    const [, , , noundersNounCreated, , , , ,] = receipt.events || [];
+
+    expect(noundersNounCreated?.event).to.eq('NounCreated');
+    expect(noundersNounCreated?.args?.tokenId).to.eq(0);
+    expect(noundersNounCreated?.args?.seed.length).to.equal(13);
+  });
+
   describe('contractURI', async () => {
     it('should return correct contractURI', async () => {
       expect(await nounsToken.contractURI()).to.eq(
