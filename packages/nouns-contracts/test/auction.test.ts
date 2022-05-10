@@ -321,4 +321,31 @@ describe('NounsAuctionHouse', () => {
       .to.emit(nounsAuctionHouse, 'AuctionSettled')
       .withArgs(nounId, '0x0000000000000000000000000000000000000000', 0);
   });
+
+  it('should emit `AuctionSettled` and pause if minting expired', async () => {
+    await (await nounsAuctionHouse.unpause()).wait();
+
+    const { nounId } = await nounsAuctionHouse.auction();
+
+    await nounsAuctionHouse.connect(bidderA).createBid(nounId, {
+      value: RESERVE_PRICE,
+    });
+
+    const expirationTimestamp = await nounsToken.mintExpirationTimestamp();
+    await ethers.provider.send('evm_setNextBlockTimestamp', [expirationTimestamp.toNumber()]);
+
+    const tx = await nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
+
+    const receipt = await tx.wait();
+
+    const settledEvent = receipt.events?.find(e => e.event === 'AuctionSettled');
+    const createdEvent = receipt.events?.find(e => e.event === 'AuctionCreated');
+
+    expect(settledEvent?.args?.nounId).to.equal(nounId);
+    expect(settledEvent?.args?.winner).to.equal(bidderA.address);
+    expect(settledEvent?.args?.amount).to.equal(RESERVE_PRICE);
+
+    expect(createdEvent).to.equal(undefined);
+    expect(await nounsAuctionHouse.paused()).to.equal(true);
+  });
 });

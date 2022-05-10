@@ -115,13 +115,13 @@ describe('NounsToken', () => {
 
   it('should revert on mint after expiration', async () => {
     const expirationTimestamp = await nounsToken.mintExpirationTimestamp();
-    await ethers.provider.send('evm_mine', [expirationTimestamp.toNumber()]);
+    await ethers.provider.send('evm_setNextBlockTimestamp', [expirationTimestamp.toNumber()]);
     await expect(nounsToken.mint()).to.be.reverted;
   });
 
   it('should support mint right before expiration', async () => {
     const expirationTimestamp = await nounsToken.mintExpirationTimestamp();
-    await ethers.provider.send('evm_mine', [expirationTimestamp.toNumber() - 10]);
+    await ethers.provider.send('evm_setNextBlockTimestamp', [expirationTimestamp.toNumber() - 1]);
 
     const receipt = await (await nounsToken.mint()).wait();
 
