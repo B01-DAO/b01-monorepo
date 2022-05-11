@@ -8,6 +8,7 @@ type ContractName =
   | 'NounsDescriptor'
   | 'NounsSeeder'
   | 'NounsToken'
+  | 'NounsRaffle'
   | 'NounsAuctionHouse'
   | 'NounsAuctionHouseProxyAdmin'
   | 'NounsAuctionHouseProxy'

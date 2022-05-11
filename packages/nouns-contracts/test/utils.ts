@@ -9,6 +9,8 @@ import {
   NounsSeeder__factory as NounsSeederFactory,
   WETH as Weth,
   WETH__factory as WethFactory,
+  NounsRaffleV1,
+  NounsRaffleV1__factory as NounsRaffleV1Factory,
 } from '../typechain-types';
 import { Block } from '@ethersproject/abstract-provider';
 
@@ -64,6 +66,30 @@ export const deployNounsToken = async (
     descriptor || (await deployNounsDescriptor(signer)).address,
     seeder || (await deployNounsSeeder(signer)).address,
     proxyRegistryAddress || address(0),
+  );
+};
+
+export const deployNounsRaffleV1 = async (
+  deployer?: SignerWithAddress,
+  oldiesDAO?: string,
+  noundersDAO?: string,
+  charities?: string[],
+  burnP?: number,
+  oldiesDAOP?: number,
+  noundersDAOP?: number,
+  charityP?: number,
+): Promise<NounsRaffleV1> => {
+  const signer = deployer || (await getSigners()).deployer;
+  const factory = new NounsRaffleV1Factory(signer);
+
+  return factory.deploy(
+    oldiesDAO || signer.address,
+    noundersDAO || signer.address,
+    charities || [signer.address],
+    burnP ?? 25,
+    oldiesDAOP ?? 25,
+    noundersDAOP ?? 25,
+    charityP ?? 25,
   );
 };
 

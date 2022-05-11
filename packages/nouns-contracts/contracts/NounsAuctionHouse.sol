@@ -17,11 +17,15 @@ import { OwnableUpgradeable } from '@openzeppelin/contracts-upgradeable/access/O
 import { IERC20 } from '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 import { INounsAuctionHouse } from './interfaces/INounsAuctionHouse.sol';
 import { INounsToken } from './interfaces/INounsToken.sol';
+import { INounsRaffle } from './interfaces/INounsRaffle.sol';
 import { IWETH } from './interfaces/IWETH.sol';
 
 contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, ReentrancyGuardUpgradeable, OwnableUpgradeable {
     // The Nouns ERC721 token contract
     INounsToken public nouns;
+
+    // The Nouns Raffle contract
+    INounsRaffle public raffle;
 
     // The address of the WETH contract
     address public weth;
@@ -48,6 +52,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
      */
     function initialize(
         INounsToken _nouns,
+        INounsRaffle _raffle,
         address _weth,
         uint256 _timeBuffer,
         uint256 _reservePrice,
@@ -61,6 +66,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
         _pause();
 
         nouns = _nouns;
+        raffle = _raffle;
         weth = _weth;
         timeBuffer = _timeBuffer;
         reservePrice = _reservePrice;
@@ -186,6 +192,16 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
     }
 
     /**
+     * @notice Set the raffle address.
+     * @dev Only callable by the owner.
+     */
+    function setRaffle(address _raffle) external override onlyOwner {
+        raffle = INounsRaffle(_raffle);
+
+        emit AuctionRaffleUpdated(_raffle);
+    }
+
+    /**
      * @notice Create an auction.
      * @dev Store the auction details in the `auction` state variable and emit an AuctionCreated event.
      * If the mint reverts, the minter was updated without pausing this contract first, or minting has expired.
@@ -213,7 +229,7 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
 
     /**
      * @notice Settle an auction, finalizing the bid and paying out to the owner.
-     * @dev If there are no bids, the Nouns is burned.
+     * @dev If there are no bids, the Noun is
      */
     function _settleAuction() internal {
         INounsAuctionHouse.Auction memory _auction = auction;
@@ -224,17 +240,26 @@ contract NounsAuctionHouse is INounsAuctionHouse, PausableUpgradeable, Reentranc
 
         auction.settled = true;
 
+        address winner;
+
+        // draw from raffle if no bids
         if (_auction.bidder == address(0)) {
+            winner = raffle.draw();
+        } else {
+            winner = _auction.bidder;
+        }
+
+        if (winner == address(0)) {
             nouns.burn(_auction.nounId);
         } else {
-            nouns.transferFrom(address(this), _auction.bidder, _auction.nounId);
+            nouns.transferFrom(address(this), winner, _auction.nounId);
         }
 
         if (_auction.amount > 0) {
             _safeTransferETHWithFallback(owner(), _auction.amount);
         }
 
-        emit AuctionSettled(_auction.nounId, _auction.bidder, _auction.amount);
+        emit AuctionSettled(_auction.nounId, winner, _auction.amount);
     }
 
     /**

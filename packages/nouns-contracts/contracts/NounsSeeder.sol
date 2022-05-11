@@ -7,6 +7,7 @@ pragma solidity ^0.8.6;
 import 'hardhat/console.sol';
 import { INounsSeeder } from './interfaces/INounsSeeder.sol';
 import { INounsDescriptor } from './interfaces/INounsDescriptor.sol';
+import { RandomUtils } from './library/RandomUtils.sol';
 
 contract NounsSeeder is INounsSeeder {
     /**
@@ -18,72 +19,80 @@ contract NounsSeeder is INounsSeeder {
         INounsDescriptor.AttributeRanges memory ranges = descriptor.getAttributeRanges();
         INounsSeeder.Seed memory seed;
 
-        seed.volumeCount = randomUint8InRange(pr >> (16 * 0), ranges.volumeCountRange[0], ranges.volumeCountRange[1]);
+        seed.volumeCount = RandomUtils.randomUint8InRange(
+            pr >> (16 * 0),
+            ranges.volumeCountRange[0],
+            ranges.volumeCountRange[1]
+        );
 
-        seed.maxVolumeHeight = randomUint8InRange(
+        seed.maxVolumeHeight = RandomUtils.randomUint8InRange(
             pr >> (16 * 1),
             ranges.maxVolumeHeightRange[0],
             ranges.maxVolumeHeightRange[1]
         );
 
-        seed.waterFeatureCount = randomUint8InRange(
+        seed.waterFeatureCount = RandomUtils.randomUint8InRange(
             pr >> (16 * 2),
             ranges.waterFeatureCountRange[0],
             ranges.waterFeatureCountRange[1]
         );
 
-        seed.grassFeatureCount = randomUint8InRange(
+        seed.grassFeatureCount = RandomUtils.randomUint8InRange(
             pr >> (16 * 3),
             ranges.grassFeatureCountRange[0],
             ranges.grassFeatureCountRange[1]
         );
 
-        seed.treeCount = randomUint8InRange(pr >> (16 * 4), ranges.treeCountRange[0], ranges.treeCountRange[1]);
+        seed.treeCount = RandomUtils.randomUint8InRange(
+            pr >> (16 * 4),
+            ranges.treeCountRange[0],
+            ranges.treeCountRange[1]
+        );
 
-        seed.bushCount = randomUint8InRange(pr >> (16 * 5), ranges.bushCountRange[0], ranges.bushCountRange[1]);
+        seed.bushCount = RandomUtils.randomUint8InRange(
+            pr >> (16 * 5),
+            ranges.bushCountRange[0],
+            ranges.bushCountRange[1]
+        );
 
-        seed.peopleCount = randomUint8InRange(pr >> (16 * 6), ranges.peopleCountRange[0], ranges.peopleCountRange[1]);
+        seed.peopleCount = RandomUtils.randomUint8InRange(
+            pr >> (16 * 6),
+            ranges.peopleCountRange[0],
+            ranges.peopleCountRange[1]
+        );
 
-        seed.lighting = randomUint8InRange(pr >> (16 * 7), ranges.lightingRange[0], ranges.lightingRange[1]);
+        seed.lighting = RandomUtils.randomUint8InRange(
+            pr >> (16 * 7),
+            ranges.lightingRange[0],
+            ranges.lightingRange[1]
+        );
 
-        seed.season = randomUint8InRange(pr >> (16 * 8), ranges.seasonRange[0], ranges.seasonRange[1]);
+        seed.season = RandomUtils.randomUint8InRange(pr >> (16 * 8), ranges.seasonRange[0], ranges.seasonRange[1]);
 
-        seed.environment = randomUint8InRange(pr >> (16 * 9), ranges.environmentRange[0], ranges.environmentRange[1]);
+        seed.environment = RandomUtils.randomUint8InRange(
+            pr >> (16 * 9),
+            ranges.environmentRange[0],
+            ranges.environmentRange[1]
+        );
 
-        seed.greenRooftopP = randomUint8InRange(
+        seed.greenRooftopP = RandomUtils.randomUint8InRange(
             pr >> (16 * 10),
             ranges.greenRooftopPRange[0],
             ranges.greenRooftopPRange[1]
         );
 
-        seed.siteEdgeOffset = randomUint256InRange(
+        seed.siteEdgeOffset = RandomUtils.randomUint256InRange(
             pr >> (16 * 11),
             ranges.siteEdgeOffsetRange[0],
             ranges.siteEdgeOffsetRange[1]
         );
 
-        seed.orientation = randomUint256InRange(
+        seed.orientation = RandomUtils.randomUint256InRange(
             pr >> (16 * 12),
             ranges.orientationRange[0],
             ranges.orientationRange[1]
         );
 
         return seed;
-    }
-
-    function randomUint8InRange(
-        uint256 randomValue,
-        uint8 min,
-        uint8 max
-    ) internal pure returns (uint8 value) {
-        return uint8(randomUint256InRange(randomValue, min, max));
-    }
-
-    function randomUint256InRange(
-        uint256 randomValue,
-        uint256 min,
-        uint256 max
-    ) internal pure returns (uint256 value) {
-        return (randomValue % (max - min + 1)) + min;
     }
 }

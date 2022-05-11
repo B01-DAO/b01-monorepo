@@ -36,6 +36,8 @@ interface INounsAuctionHouse {
 
     event AuctionDurationUpdated(uint256 duration);
 
+    event AuctionRaffleUpdated(address raffle);
+
     function settleAuction() external;
 
     function settleCurrentAndCreateNewAuction() external;
@@ -53,4 +55,6 @@ interface INounsAuctionHouse {
     function setMinBidIncrementPercentage(uint8 minBidIncrementPercentage) external;
 
     function setDuration(uint256 duration) external;
+
+    function setRaffle(address raffle) external;
 }

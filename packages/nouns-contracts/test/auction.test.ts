@@ -9,8 +9,9 @@ import {
   NounsDescriptor__factory as NounsDescriptorFactory,
   NounsToken,
   WETH as Weth,
+  NounsRaffleV1,
 } from '../typechain-types';
-import { deployNounsToken, deployWeth } from './utils';
+import { deployNounsToken, deployWeth, deployNounsRaffleV1 } from './utils';
 
 chai.use(solidity);
 const { expect } = chai;
@@ -18,6 +19,7 @@ const { expect } = chai;
 describe('NounsAuctionHouse', () => {
   let nounsAuctionHouse: NounsAuctionHouse;
   let nounsToken: NounsToken;
+  let nounsRaffleV1: NounsRaffleV1;
   let weth: Weth;
   let deployer: SignerWithAddress;
   let noundersDAO: SignerWithAddress;
@@ -34,6 +36,7 @@ describe('NounsAuctionHouse', () => {
     const auctionHouseFactory = await ethers.getContractFactory('NounsAuctionHouse', deployer);
     return upgrades.deployProxy(auctionHouseFactory, [
       nounsToken.address,
+      nounsRaffleV1.address,
       weth.address,
       TIME_BUFFER,
       RESERVE_PRICE,
@@ -47,6 +50,8 @@ describe('NounsAuctionHouse', () => {
 
     nounsToken = await deployNounsToken(deployer, noundersDAO.address, deployer.address);
     weth = await deployWeth(deployer);
+    nounsRaffleV1 = await deployNounsRaffleV1(deployer);
+
     nounsAuctionHouse = await deploy(deployer);
 
     await nounsToken.setMinter(nounsAuctionHouse.address);
@@ -63,6 +68,7 @@ describe('NounsAuctionHouse', () => {
   it('should revert if a second initialization is attempted', async () => {
     const tx = nounsAuctionHouse.initialize(
       nounsToken.address,
+      nounsRaffleV1.address,
       weth.address,
       TIME_BUFFER,
       RESERVE_PRICE,
@@ -308,18 +314,25 @@ describe('NounsAuctionHouse', () => {
     expect(paused).to.equal(true);
   });
 
-  it('should burn a Noun on auction settlement if no bids are received', async () => {
+  it('should raffle a Noun on auction settlement if no bids are received', async () => {
     await (await nounsAuctionHouse.unpause()).wait();
 
     const { nounId } = await nounsAuctionHouse.auction();
 
     await ethers.provider.send('evm_increaseTime', [60 * 60 * 25]); // Add 25 hours
 
-    const tx = nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
+    const tx = await nounsAuctionHouse.connect(bidderA).settleCurrentAndCreateNewAuction();
+    expect(tx).to.emit(nounsAuctionHouse, 'AuctionSettled');
 
-    await expect(tx)
-      .to.emit(nounsAuctionHouse, 'AuctionSettled')
-      .withArgs(nounId, '0x0000000000000000000000000000000000000000', 0);
+    const receipt = await tx.wait();
+    const [, , , , auctionSettled] = receipt.events || [];
+
+    expect(auctionSettled?.args?.nounId).to.equal(nounId);
+    expect(auctionSettled?.args?.winner).to.be.oneOf([
+      deployer.address,
+      '0x0000000000000000000000000000000000000000',
+    ]);
+    expect(auctionSettled?.args?.amount).to.equal(0);
   });
 
   it('should emit `AuctionSettled` and pause if minting expired', async () => {
