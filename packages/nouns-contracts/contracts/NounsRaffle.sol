@@ -63,8 +63,13 @@ contract NounsRaffleV1 is INounsRaffle, Ownable {
         } else if (_percentage <= burnP + oldiesDAOP + noundersDAOP) {
             winner = noundersDAO;
         } else {
-            uint8 _charityIndex = RandomUtils.randomUint8InRange(pr >> 16, 0, uint8(charities.length - 1));
-            winner = charities[_charityIndex];
+            uint8 length = uint8(charities.length);
+            if (length == 0) {
+                winner = address(0);
+            } else {
+                uint8 _charityIndex = RandomUtils.randomUint8InRange(pr >> 16, 0, length - 1);
+                winner = charities[_charityIndex];
+            }
         }
     }
 }

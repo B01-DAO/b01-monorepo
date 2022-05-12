@@ -63,6 +63,11 @@
           },
           {
             "internalType": "uint8",
+            "name": "environment",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
             "name": "greenRooftopP",
             "type": "uint8"
           },

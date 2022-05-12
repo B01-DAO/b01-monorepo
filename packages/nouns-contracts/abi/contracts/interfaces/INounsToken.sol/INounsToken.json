@@ -51,6 +51,44 @@
   },
   {
     "anonymous": false,
+    "inputs": [],
+    "name": "DescriptorLocked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "contract INounsDescriptor",
+        "name": "descriptor",
+        "type": "address"
+      }
+    ],
+    "name": "DescriptorUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "MinterLocked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "minter",
+        "type": "address"
+      }
+    ],
+    "name": "MinterUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
     "inputs": [
       {
         "indexed": true,
@@ -120,6 +158,11 @@
           },
           {
             "internalType": "uint8",
+            "name": "environment",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint8",
             "name": "greenRooftopP",
             "type": "uint8"
           },
@@ -145,25 +188,6 @@
   },
   {
     "anonymous": false,
-    "inputs": [],
-    "name": "DescriptorLocked",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "contract INounsDescriptor",
-        "name": "descriptor",
-        "type": "address"
-      }
-    ],
-    "name": "DescriptorUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
         "indexed": false,
@@ -173,25 +197,6 @@
       }
     ],
     "name": "NoundersDAOUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "MinterLocked",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "minter",
-        "type": "address"
-      }
-    ],
-    "name": "MinterUpdated",
     "type": "event"
   },
   {
@@ -515,11 +520,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "noundersDAO",
+        "name": "minter",
         "type": "address"
       }
     ],
-    "name": "setNoundersDAO",
+    "name": "setMinter",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -528,11 +533,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "minter",
+        "name": "noundersDAO",
         "type": "address"
       }
     ],
-    "name": "setMinter",
+    "name": "setNoundersDAO",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

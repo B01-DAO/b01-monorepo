@@ -59,6 +59,19 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "duration",
+        "type": "uint256"
+      }
+    ],
+    "name": "AuctionDurationUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "uint256",
         "name": "nounId",
@@ -85,6 +98,19 @@
       }
     ],
     "name": "AuctionMinBidIncrementPercentageUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "raffle",
+        "type": "address"
+      }
+    ],
+    "name": "AuctionRaffleUpdated",
     "type": "event"
   },
   {
@@ -136,6 +162,19 @@
       }
     ],
     "name": "AuctionTimeBufferUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
     "type": "event"
   },
   {
@@ -222,19 +261,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "nouns",
-    "outputs": [
-      {
-        "internalType": "contract INounsToken",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -265,6 +291,11 @@
       {
         "internalType": "contract INounsToken",
         "name": "_nouns",
+        "type": "address"
+      },
+      {
+        "internalType": "contract INounsRaffle",
+        "name": "_raffle",
         "type": "address"
       },
       {
@@ -313,6 +344,19 @@
   },
   {
     "inputs": [],
+    "name": "nouns",
+    "outputs": [
+      {
+        "internalType": "contract INounsToken",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -346,6 +390,19 @@
   },
   {
     "inputs": [],
+    "name": "raffle",
+    "outputs": [
+      {
+        "internalType": "contract INounsRaffle",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -367,12 +424,38 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_duration",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDuration",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint8",
         "name": "_minBidIncrementPercentage",
         "type": "uint8"
       }
     ],
     "name": "setMinBidIncrementPercentage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_raffle",
+        "type": "address"
+      }
+    ],
+    "name": "setRaffle",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

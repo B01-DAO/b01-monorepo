@@ -71,6 +71,11 @@
           },
           {
             "internalType": "uint8[2]",
+            "name": "environmentRange",
+            "type": "uint8[2]"
+          },
+          {
+            "internalType": "uint8[2]",
             "name": "greenRooftopPRange",
             "type": "uint8[2]"
           },
@@ -96,6 +101,19 @@
   {
     "inputs": [],
     "name": "getBushCountRange",
+    "outputs": [
+      {
+        "internalType": "uint8[2]",
+        "name": "",
+        "type": "uint8[2]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getEnvironmentRange",
     "outputs": [
       {
         "internalType": "uint8[2]",

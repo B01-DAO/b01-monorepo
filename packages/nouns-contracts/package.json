@@ -9,6 +9,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "export-abi": "npx hardhat export-abi",
     "build": "pnpm build:sol && pnpm build:ts && pnpm build:declarations",
     "build:ts": "tsc -p tsconfig.build.json",
     "build:sol": "npx hardhat compile",

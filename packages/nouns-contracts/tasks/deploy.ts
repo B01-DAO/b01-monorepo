@@ -12,6 +12,7 @@ type ContractName =
   | 'NounsDescriptor'
   | 'NounsSeeder'
   | 'NounsToken'
+  | 'NounsRaffleV1'
   | 'NounsAuctionHouse'
   | 'NounsAuctionHouseProxyAdmin'
   | 'NounsAuctionHouseProxy'
@@ -30,6 +31,12 @@ task('deploy', 'Deploys NounsDescriptor, NounsSeeder, and NounsToken')
   .addParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
   .addParam('weth', 'The WETH contract address', undefined, types.string)
   .addParam('tokenuriupdater', 'Address of user who will update the token URI')
+  .addOptionalParam(
+    'charitylist',
+    'Comma-separated addresses of charities for raffle',
+    undefined,
+    types.string,
+  )
   .addOptionalParam('auctionTimeBuffer', 'The auction time buffer (seconds)', 5 * 60, types.int)
   .addOptionalParam('auctionReservePrice', 'The auction reserve price (wei)', 1, types.int)
   .addOptionalParam(
@@ -82,6 +89,17 @@ task('deploy', 'Deploys NounsDescriptor, NounsSeeder, and NounsToken')
           proxyRegistryAddress,
         ],
       },
+      NounsRaffleV1: {
+        args: [
+          deployer.address,
+          args.noundersdao || deployer.address,
+          args.charityList ? args.charitylist.split(',') : [deployer.address],
+          30,
+          10,
+          30,
+          30,
+        ],
+      },
       NounsAuctionHouse: {
         waitForConfirmation: true,
       },
@@ -93,6 +111,7 @@ task('deploy', 'Deploys NounsDescriptor, NounsSeeder, and NounsToken')
           () =>
             new Interface(NounsAuctionHouseABI).encodeFunctionData('initialize', [
               contracts['NounsToken'].address,
+              contracts['NounsRaffleV1'].address,
               args.weth,
               args.auctionTimeBuffer,
               args.auctionReservePrice,
