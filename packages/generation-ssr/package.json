@@ -1,0 +1,35 @@
+{
+  "name": "model-ssr",
+  "version": "0.0.1",
+  "scripts": {
+    "pre:start": "rimraf out && mkdirp out",
+    "start": "npm run pre:start && etsc && VITE_APP_CONFIG=server node ./dist/ssr.js",
+    "generate": "npm run start && ffmpeg -y -framerate 60 -i out/%04d.png out/output.webm"
+  },
+  "devDependencies": {
+    "@types/cli-progress": "^3.9.2",
+    "@types/command-line-args": "^5.2.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/gl": "^4.1.0",
+    "@types/jsdom": "^16.2.14",
+    "@types/node": "^17.0.23",
+    "esbuild": "^0.14.27",
+    "esbuild-node-tsc": "^1.8.5",
+    "node-mkdirp": "^0.0.1",
+    "rimraf": "^3.0.2",
+    "tslib": "^2.3.1",
+    "typescript": "~4.6.2"
+  },
+  "dependencies": {
+    "3d-core-raub": "^3.6.0",
+    "@nouns/generation-core": "workspace:../generation-core",
+    "@types/three": "^0.139.0",
+    "cli-progress": "^3.10.0",
+    "command-line-args": "^5.2.1",
+    "fs-extra": "^10.0.1",
+    "glfw-raub": "^4.6.2",
+    "jsdom": "^19.0.0",
+    "three": "0.139.2",
+    "webgl-raub": "^2.2.6"
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "lib": ["es2021", "DOM", "DOM.Iterable"],
+        "module": "commonjs",
+        "target": "esnext",
+        "jsx": "react-jsx",
+
+        "rootDir": "./src",
+        "baseUrl": "./src",
+        "paths": {
+            "@init": ["./init"]
+        },
+        "moduleResolution": "node",
+
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+
+        "noEmit": true
+    },
+    "include": ["./src/**/*"],
+    "ts-node": {
+        "transpileOnly": true,
+        "esm": true,
+        "files": true
+    }
+}
