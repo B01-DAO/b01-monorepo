@@ -1,10 +1,12 @@
 {
-  "name": "model-ssr",
+  "name": "@nouns/generation-ssr",
   "version": "0.0.1",
+  "main": "./dist/index.js",
   "scripts": {
+    "build": "etsc && dts-bundle-generator src/index.ts -o dist/index.d.ts",
+    "prepare": "npm run build",
     "pre:start": "rimraf out && mkdirp out",
-    "start": "npm run pre:start && etsc && VITE_APP_CONFIG=server node ./dist/ssr.js",
-    "generate": "npm run start && ffmpeg -y -framerate 60 -i out/%04d.png out/output.webm"
+    "start": "npm run pre:start && npm run build && ./dist/ssr.js"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.9.2",
@@ -13,6 +15,7 @@
     "@types/gl": "^4.1.0",
     "@types/jsdom": "^16.2.14",
     "@types/node": "^17.0.23",
+    "dts-bundle-generator": "^6.9.0",
     "esbuild": "^0.14.27",
     "esbuild-node-tsc": "^1.8.5",
     "node-mkdirp": "^0.0.1",

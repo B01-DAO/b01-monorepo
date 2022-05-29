@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "declaration": true,
         "lib": ["es2021", "DOM", "DOM.Iterable"],
         "module": "commonjs",
         "target": "esnext",
@@ -12,7 +13,7 @@
         },
         "moduleResolution": "node",
 
-        "strict": true,
+        "strict": false,
         "esModuleInterop": true,
         "skipLibCheck": true,
 

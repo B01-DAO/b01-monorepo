@@ -147,12 +147,12 @@ function changeSeasonIfNeeded() {
 }
 
 function captureFramesIfNeeded() {
-    const { framesToRecord, progressHandler, screen } = mainStore.get.state();
+    const { framesToRecord, progressHandler, snapshotHandler } = mainStore.get.state();
 
     if (frames <= framesToRecord) {
         progressHandler({ type: 'inc', frame: frames });
 
-        if (frames !== 0) screen?.snapshot(`out/${frames.toString().padStart(4, '0')}.png`);
+        if (frames !== 0) snapshotHandler?.(frames);
     } else {
         progressHandler({ type: 'stop' });
     }
