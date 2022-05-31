@@ -24,10 +24,10 @@ export const generateAssets = async ({ seed = '', frames = 1800 } = {}) => {
                 renderer: screen.renderer,
                 framesToRecord: frames,
                 captureFrames: true,
-                snapshotHandler: frame =>
-                    screen.snapshot(`${outDir}/${frame.toString().padStart(4, '0')}.png`),
                 progressHandler: e => {
-                    if (e.type === 'stop') res();
+                    if (e.type === 'inc') {
+                        screen.snapshot(`${outDir}/${e.frame.toString().padStart(4, '0')}.png`);
+                    } else if (e.type === 'stop') res();
                 },
                 isWebApp: false,
             },

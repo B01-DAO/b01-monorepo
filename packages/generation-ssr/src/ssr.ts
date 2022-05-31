@@ -20,8 +20,6 @@ const options = commandLineArgs([
     { name: 'movie', alias: 'm', type: Boolean, defaultValue: true },
 ]);
 
-console.log(__dirname);
-
 startGenerating(
     {
         requestAnimationFrame,
@@ -32,8 +30,10 @@ startGenerating(
         captureFrames: true,
         progressHandler: e => {
             if (e.type === 'start') progressBar.start(options.frames, 0);
-            else if (e.type === 'inc') progressBar.increment();
-            else if (e.type === 'stop') {
+            else if (e.type === 'inc') {
+                progressBar.increment();
+                screen.snapshot(`out/${e.frame.toString().padStart(4, '0')}.png`);
+            } else if (e.type === 'stop') {
                 progressBar.stop();
 
                 if (options.movie) {
@@ -46,10 +46,11 @@ startGenerating(
                             '../out/%04d.png',
                         )} ${path.join(__dirname, '../out/output.webm')}`,
                     );
+
+                    process.exit(); // necessary to prevent weird hangs/segfaults
                 }
             }
         },
-        snapshotHandler: frame => screen.snapshot(`out/${frame.toString().padStart(4, '0')}.png`),
         isWebApp: false,
     },
     options.seed,

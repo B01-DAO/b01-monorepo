@@ -9,9 +9,8 @@ export type MainStore = {
     document: typeof document;
     renderer: THREE.WebGLRenderer;
     captureFrames?: boolean;
-    framesToRecord?: number;
+    framesToRecord: number;
     progressHandler?: (e: ProgressEvent) => void;
-    snapshotHandler?: (frame: number) => void;
     isWebApp: boolean;
 };
 
@@ -21,8 +20,7 @@ export const mainStore = createStore('mainStore')({
     document: undefined,
     renderer: undefined,
     captureFrames: undefined,
-    framesToRecord: undefined,
+    framesToRecord: 1800,
     progressHandler: undefined,
-    snapshotHandler: undefined,
     isWebApp: false,
 } as MainStore);

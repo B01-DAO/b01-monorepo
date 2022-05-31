@@ -6,7 +6,7 @@
     "build": "etsc && dts-bundle-generator src/index.ts -o dist/index.d.ts",
     "prepare": "npm run build",
     "pre:start": "rimraf out && mkdirp out",
-    "start": "npm run pre:start && npm run build && ./dist/ssr.js"
+    "start": "npm run pre:start && npm run build && node ./dist/ssr.js"
   },
   "devDependencies": {
     "@types/cli-progress": "^3.9.2",

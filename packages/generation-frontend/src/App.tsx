@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
 import Color from 'color';
 import * as THREE from 'three';
 import {
     startGenerating,
     seedStore,
-    buildArrayForSelect,
     lightParameterList,
     seasonList,
     environmentStore,
@@ -18,32 +16,45 @@ import {
 
 import './index.scss';
 
-const App = () => {
+import { buildArrayForSelect } from './helpers';
+
+const App: React.FC = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const urlSeed = urlParams.get('seed');
     const seedString = seedStore.use.seedString();
     const [localSeedString, setLocalSeedString] = useState(urlSeed ?? seedString);
 
-    useEffect(
-        () =>
-            startGenerating(
-                {
-                    requestAnimationFrame,
-                    window,
-                    document,
-                    renderer: new THREE.WebGLRenderer({
-                        antialias: true,
-                        preserveDrawingBuffer: true,
-                    }),
-                    isWebApp: true,
-                },
-                urlSeed ?? undefined,
-            ),
-        [],
-    );
+    const updateSeed = (seed: string) => {
+        setLocalSeedString(seed);
+        window.history.replaceState(null, window.location.href, `?seed=${seed}`);
+        seedStore.set.seedString(seed);
+    };
+
+    const generate = (seed?: string) =>
+        startGenerating(
+            {
+                requestAnimationFrame,
+                window,
+                document,
+                renderer: new THREE.WebGLRenderer({
+                    antialias: true,
+                    preserveDrawingBuffer: true,
+                }),
+                isWebApp: true,
+                framesToRecord: 1800,
+            },
+            seed,
+        );
+
+    // Update URL when seed string changes
+    useEffect(() => {
+        updateSeed(seedString);
+    }, [seedString]);
+
+    useEffect(() => generate(urlSeed ?? undefined), []);
 
     useEffect(() => {
-        if (urlSeed) setLocalSeedString(urlSeed);
+        if (urlSeed) updateSeed(urlSeed);
     }, [urlSeed]);
 
     const lights = buildArrayForSelect(lightParameterList);
@@ -60,8 +71,13 @@ const App = () => {
     return (
         <div style={{ backgroundColor: getBGColor(), width: '100%' }}>
             <h1 style={getFontStyle()}>Building_01</h1>
-            <div id={'controls'} style={getFontStyle()}>
-                <form onSubmit={e => e.preventDefault()}>
+            <div id="controls" style={getFontStyle()}>
+                <form
+                    onSubmit={e => {
+                        e.preventDefault();
+                        updateSeed(localSeedString);
+                    }}
+                >
                     <fieldset>
                         <label>
                             Seed String:
@@ -70,20 +86,13 @@ const App = () => {
                                 onChange={e => setLocalSeedString(e.currentTarget.value)}
                             />
                         </label>
+                        <button type="submit">Change Seed String</button>
                         <button
                             type="button"
-                            onClick={() =>
-                                (window.location.href =
-                                    window.location.href.split('?')[0] + '?seed=' + localSeedString)
-                            }
-                        >
-                            Change Seed String
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() =>
-                                (window.location.href = window.location.href.split('?')[0])
-                            }
+                            onClick={() => {
+                                updateSeed('');
+                                generate();
+                            }}
                         >
                             Randomize
                         </button>
@@ -99,7 +108,9 @@ const App = () => {
                                 value={environmentStore.use.currentLightingName()}
                             >
                                 {lights.map(({ value, label }) => (
-                                    <option value={value}>{label}</option>
+                                    <option value={value} key={value}>
+                                        {label}
+                                    </option>
                                 ))}
                             </select>
                         </label>
@@ -112,7 +123,9 @@ const App = () => {
                                 value={environmentStore.use.currentSeasonName()}
                             >
                                 {seasons.map(({ value, label }) => (
-                                    <option value={value}>{label}</option>
+                                    <option value={value} key={value}>
+                                        {label}
+                                    </option>
                                 ))}
                             </select>
                         </label>
@@ -140,5 +153,4 @@ const App = () => {
     );
 };
 
-const root = createRoot(document.body as HTMLElement);
-root.render(<App />);
+export default App;

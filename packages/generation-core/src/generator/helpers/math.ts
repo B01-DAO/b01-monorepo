@@ -18,8 +18,8 @@ export let buildingRandom: () => number;
 
 seedStore.store.subscribe(() => {
     const seed = seedStore.get.originalSeed();
+
     initBaseScene();
-    window.history?.replaceState(null, window.location.href, '?seed=' + seedStore.get.seedString());
 
     if (seed > 5) {
         customRandom = deterministicRandom(seed);
@@ -28,10 +28,9 @@ seedStore.store.subscribe(() => {
         const defaultY = (0.5 - buildingRandom()) * 10;
         const color = randomColor(buildingRandom);
         const maxHeight = randomRange(buildingRandom(), 3, 8);
+
         let treeType = TreeTypes.Sphere;
-        if (customRandom() < 0.5) {
-            treeType = TreeTypes.Cone;
-        }
+        if (customRandom() < 0.5) treeType = TreeTypes.Cone;
 
         buildingStore.set.buildingColor(color);
         buildingStore.set.defaultWidth(randomRange(buildingRandom(), 0.1, 0.2));
@@ -49,6 +48,7 @@ seedStore.store.subscribe(() => {
         buildingStore.set.hasDodecahedron(buildingRandom() < 0.5);
         buildingStore.set.maxHeight(maxHeight);
         buildingStore.set.hasPitchedRoofs(buildingRandom() < 0.5);
+
         const specialShapeRandomValue = buildingRandom();
         if (specialShapeRandomValue < 0.5) {
             buildingStore.set.specialShape(SpecialShapeTypes.dodecahedron);

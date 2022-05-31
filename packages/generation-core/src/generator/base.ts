@@ -80,6 +80,7 @@ export function reset() {
     driveBoundingBoxes = [];
     landscapeBoundingBoxes = [];
     craftBoundingBoxes = [];
+    renderer?.domElement?.remove?.();
 }
 
 export function toggleRotation() {
@@ -147,13 +148,8 @@ function changeSeasonIfNeeded() {
 }
 
 function captureFramesIfNeeded() {
-    const { framesToRecord, progressHandler, snapshotHandler } = mainStore.get.state();
+    const { framesToRecord, progressHandler } = mainStore.get.state();
 
-    if (frames <= framesToRecord) {
-        progressHandler({ type: 'inc', frame: frames });
-
-        if (frames !== 0) snapshotHandler?.(frames);
-    } else {
-        progressHandler({ type: 'stop' });
-    }
+    if (frames <= framesToRecord) progressHandler({ type: 'inc', frame: frames });
+    else progressHandler({ type: 'stop' });
 }
