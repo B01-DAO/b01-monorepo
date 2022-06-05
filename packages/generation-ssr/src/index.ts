@@ -2,12 +2,17 @@ import path from 'path';
 import child_process from 'child_process';
 import fs from 'fs/promises';
 
+import { NounSeed } from '@nouns/sdk';
 import { startGenerating } from '@nouns/generation-core';
 
 import { requestAnimationFrame, window, document, screen } from './init';
 import { writeModel } from './exporter';
 
-export const generateAssets = async ({ seed = '', frames = 1800 } = {}) => {
+export const generateAssets = async ({
+    seed = {} as Partial<NounSeed>,
+    rawSeed = '',
+    frames = 1800,
+} = {}) => {
     // don't yeet unknown directories
     const outDir = path.join(__dirname, '../out');
 
@@ -31,7 +36,7 @@ export const generateAssets = async ({ seed = '', frames = 1800 } = {}) => {
                 },
                 isWebApp: false,
             },
-            seed,
+            { seed, rawSeed },
         );
         writeModel(`${outDir}/out.gltf`);
     });

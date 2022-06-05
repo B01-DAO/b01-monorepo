@@ -38,6 +38,7 @@ importers:
 
   packages/generation-core:
     specifiers:
+      '@nouns/sdk': workspace:*
       '@size-limit/preset-small-lib': ^7.0.8
       '@types/node': ^17.0.33
       '@types/three': ^0.139.0
@@ -53,6 +54,7 @@ importers:
       three: 0.139.2
       typescript: ^4.6.4
     dependencies:
+      '@nouns/sdk': link:../nouns-sdk
       '@udecode/zustood': 0.4.4
       color: 4.2.3
       get-random-values: 1.2.2
@@ -72,6 +74,7 @@ importers:
   packages/generation-frontend:
     specifiers:
       '@nouns/generation-core': workspace:../generation-core
+      '@nouns/sdk': workspace:../nouns-sdk
       '@types/color': ^3.0.3
       '@types/react': ^18.0.9
       '@types/react-dom': ^18.0.5
@@ -88,6 +91,7 @@ importers:
       vite-plugin-environment: ^1.1.0
     dependencies:
       '@nouns/generation-core': link:../generation-core
+      '@nouns/sdk': link:../nouns-sdk
       '@vitejs/plugin-react-refresh': 1.3.6
       color: 4.2.3
       react: 18.1.0
@@ -107,6 +111,7 @@ importers:
   packages/generation-ssr:
     specifiers:
       '@nouns/generation-core': workspace:../generation-core
+      '@nouns/sdk': workspace:../nouns-sdk
       '@types/cli-progress': ^3.9.2
       '@types/command-line-args': ^5.2.0
       '@types/fs-extra': ^9.0.13
@@ -131,6 +136,7 @@ importers:
       webgl-raub: ^2.2.6
     dependencies:
       '@nouns/generation-core': link:../generation-core
+      '@nouns/sdk': link:../nouns-sdk
       '@types/three': 0.139.0
       3d-core-raub: 3.6.0
       cli-progress: 3.11.1
@@ -329,7 +335,7 @@ importers:
   packages/nouns-sdk:
     specifiers:
       '@ethersproject/providers': ^5.6.5
-      '@nouns/contracts': workspace:../nouns-contracts
+      '@nouns/contracts': workspace:*
       '@types/pngjs': ^6.0.1
       ethers: ^5.4.7
       pngjs: ^6.0.0
@@ -16672,7 +16678,7 @@ packages:
     dev: true
 
   /lodash.camelcase/4.3.0:
-    resolution: {integrity: sha1-soqmKIorn8ZRA1x3EfZathkDMaY=}
+    resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
 
   /lodash.debounce/4.0.8:
     resolution: {integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168=}
@@ -16697,15 +16703,15 @@ packages:
     dev: false
 
   /lodash.kebabcase/4.1.1:
-    resolution: {integrity: sha1-hImxyw0p/4gZXM7KRI/21swpXDY=}
+    resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
     dev: true
 
   /lodash.lowercase/4.3.0:
-    resolution: {integrity: sha1-RlFaztSssLcJMTMzOvBo5MOxTp0=}
+    resolution: {integrity: sha512-UcvP1IZYyDKyEL64mmrwoA1AbFu5ahojhTtkOUr1K9dbuxzS9ev8i4TxMMGCqRC9TE8uDaSoufNAXxRPNTseVA==}
     dev: true
 
   /lodash.lowerfirst/4.3.1:
-    resolution: {integrity: sha1-3jx7EuAsZSSgBZwvbLfFxSZVoT0=}
+    resolution: {integrity: sha512-UUKX7VhP1/JL54NXg2aq/E1Sfnjjes8fNYTNkPU8ZmsaVeBvPHKdbNaN79Re5XRL01u6wbq3j0cbYZj71Fcu5w==}
     dev: true
 
   /lodash.memoize/4.1.2:
@@ -16716,15 +16722,15 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
   /lodash.pad/4.5.1:
-    resolution: {integrity: sha1-QzCUmoM6fI2iLMIPaibE1Z3runA=}
+    resolution: {integrity: sha512-mvUHifnLqM+03YNzeTBS1/Gr6JRFjd3rRx88FHWUvamVaT9k2O/kXha3yBSOwB9/DTQrSTLJNHvLBBt2FdX7Mg==}
     dev: true
 
   /lodash.padend/4.6.1:
-    resolution: {integrity: sha1-U8y6BH0G4VjTEfRdpiX05J5vFm4=}
+    resolution: {integrity: sha512-sOQs2aqGpbl27tmCS1QNZA09Uqp01ZzWfDUoD+xzTii0E7dSQfRKcRetFwa+uXaxaqL+TKm7CgD2JdKP7aZBSw==}
     dev: true
 
   /lodash.padstart/4.6.1:
-    resolution: {integrity: sha1-0uPuv/DZ05rVD1y9G1KnvOa7YRs=}
+    resolution: {integrity: sha512-sW73O6S8+Tg66eY56DBk85aQzzUJDtpoXFBgELMd5P/SotAguo+1kYO6RuYgXxA4HJH3LFTFPASX6ET6bjfriw==}
     dev: true
 
   /lodash.pickby/4.6.0:
@@ -16732,11 +16738,11 @@ packages:
     dev: false
 
   /lodash.repeat/4.1.0:
-    resolution: {integrity: sha1-/H3oEx2MisB+S0n3T/6CnR8r7EQ=}
+    resolution: {integrity: sha512-eWsgQW89IewS95ZOcr15HHCX6FVDxq3f2PNUIng3fyzsPev9imFQxIYdFZ6crl8L56UR6ZlGDLcEb3RZsCSSqw==}
     dev: true
 
   /lodash.snakecase/4.1.1:
-    resolution: {integrity: sha1-OdcUo1NXFHg3rv1ktdy7Fr7Nj40=}
+    resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
     dev: true
 
   /lodash.sortby/4.7.0:
@@ -16744,7 +16750,7 @@ packages:
     dev: false
 
   /lodash.startcase/4.4.0:
-    resolution: {integrity: sha1-lDbjTtJgk+1/+uGTYUQ1CRXZrdg=}
+    resolution: {integrity: sha512-+WKqsK294HMSc2jEbNgpHpd0JfIBhp7rEV4aqXWqFr6AlXov+SlcgB1Fv01y2kGe3Gc8nMW7VA0SrGuSkRfIEg==}
     dev: true
 
   /lodash.template/4.5.0:
@@ -16761,15 +16767,15 @@ packages:
     dev: false
 
   /lodash.trim/4.5.1:
-    resolution: {integrity: sha1-NkJefukL5KpeJ7zruFt9EepHqlc=}
+    resolution: {integrity: sha512-nJAlRl/K+eiOehWKDzoBVrSMhK0K3A3YQsUNXHQa5yIrKBAhsZgSu3KoAFoFT+mEgiyBHddZ0pRk1ITpIp90Wg==}
     dev: true
 
   /lodash.trimend/4.5.1:
-    resolution: {integrity: sha1-EoBENyhrmMrYmWt5QU4RMAEUCC8=}
+    resolution: {integrity: sha512-lsD+k73XztDsMBKPKvzHXRKFNMohTjoTKIIo4ADLn5dA65LZ1BqlAvSXhR2rPEC3BgAUQnzMnorqDtqn2z4IHA==}
     dev: true
 
   /lodash.trimstart/4.5.1:
-    resolution: {integrity: sha1-j/TexTLYJIavWVc8OURZFOlEp/E=}
+    resolution: {integrity: sha512-b/+D6La8tU76L/61/aN0jULWHkT0EeJCmVstPBn/K9MtD2qBW83AsBNrr63dKuWYwVMO7ucv13QNO/Ek/2RKaQ==}
     dev: true
 
   /lodash.truncate/4.4.2:
@@ -16780,11 +16786,11 @@ packages:
     dev: false
 
   /lodash.uppercase/4.3.0:
-    resolution: {integrity: sha1-xASr/RRp+Tkx+bskz2zH1XBZvHM=}
+    resolution: {integrity: sha512-+Nbnxkj7s8K5U8z6KnEYPGUOGp3woZbB7Ecs7v3LkkjLQSm2kP9SKIILitN1ktn2mB/tmM9oSlku06I+/lH7QA==}
     dev: true
 
   /lodash.upperfirst/4.3.1:
-    resolution: {integrity: sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=}
+    resolution: {integrity: sha512-sReKOYJIJf74dhJONhU4e0/shzi1trVbSWDOhKYE5XV2O+H7Sb2Dihwuc7xWxVl+DgFPyTqIN3zMfT9cq5iWDg==}
     dev: true
 
   /lodash.values/4.3.0:
@@ -18572,7 +18578,7 @@ packages:
     dev: false
 
   /once/1.4.0:
-    resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
+    resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
     dependencies:
       wrappy: 1.0.2
 
@@ -19937,7 +19943,6 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
-    dev: false
 
   /postinstall-postinstall/2.1.0:
     resolution: {integrity: sha512-7hQX6ZlZXIoRiWNrbMQaLzUUfH+sSx39u8EJ9HYuDc1kLo9IXKWjM5RSquZN1ad5GnH8CGFM78fsAAQi3OKEEQ==}
@@ -20440,7 +20445,7 @@ packages:
     dev: false
 
   /ramda/0.24.1:
-    resolution: {integrity: sha1-w7d1UZfzW43DUCIoJixMkd22uFc=}
+    resolution: {integrity: sha512-HEm619G8PaZMfkqCa23qiOe7r3R0brPu7ZgOsgKUsnvLhd0qhc/vTjkUovomgPWa5ECBa08fJZixth9LaoBo5w==}
     dev: true
 
   /ramda/0.25.0:
@@ -21494,7 +21499,6 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
-    dev: false
 
   /rsa-pem-to-jwk/1.1.3:
     resolution: {integrity: sha1-JF52vbfnI0z+58oDLTG1TDj6uY4=}
@@ -21631,7 +21635,6 @@ packages:
       chokidar: 3.5.3
       immutable: 4.1.0
       source-map-js: 1.0.2
-    dev: false
 
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
@@ -22290,7 +22293,6 @@ packages:
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /source-map-resolve/0.5.3:
     resolution: {integrity: sha512-Htz+RnsXWk5+P2slx5Jh3Q66vhQj1Cllm0zvnaY98+NFx+Dv2CF/f5O/t8x+KaNdrdIAsruNzoh/KpialbqAnw==}
@@ -24210,7 +24212,6 @@ packages:
       sass: 1.52.1
     optionalDependencies:
       fsevents: 2.3.2
-    dev: false
 
   /vm-browserify/1.1.2:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}

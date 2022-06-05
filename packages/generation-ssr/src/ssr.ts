@@ -53,6 +53,6 @@ startGenerating(
         },
         isWebApp: false,
     },
-    options.seed,
+    { rawSeed: options.seed },
 );
 writeModel('out/out.gltf');

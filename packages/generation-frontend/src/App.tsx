@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Color from 'color';
 import * as THREE from 'three';
+import { NounSeed } from '@nouns/sdk';
 import {
     startGenerating,
     seedStore,
@@ -18,10 +19,13 @@ import './index.scss';
 
 import { buildArrayForSelect } from './helpers';
 
+import SeedSettings from './SeedSettings';
+
 const App: React.FC = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const urlSeed = urlParams.get('seed');
     const seedString = seedStore.use.seedString();
+    const seedObject = seedStore.use.seed();
     const [localSeedString, setLocalSeedString] = useState(urlSeed ?? seedString);
 
     const updateSeed = (seed: string) => {
@@ -36,20 +40,15 @@ const App: React.FC = () => {
                 requestAnimationFrame,
                 window,
                 document,
-                renderer: new THREE.WebGLRenderer({
-                    antialias: true,
-                    preserveDrawingBuffer: true,
-                }),
+                renderer: new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }),
                 isWebApp: true,
                 framesToRecord: 1800,
             },
-            seed,
+            { rawSeed: seed },
         );
 
     // Update URL when seed string changes
-    useEffect(() => {
-        updateSeed(seedString);
-    }, [seedString]);
+    useEffect(() => updateSeed(seedString), [seedString]);
 
     useEffect(() => generate(urlSeed ?? undefined), []);
 
@@ -86,7 +85,9 @@ const App: React.FC = () => {
                                 onChange={e => setLocalSeedString(e.currentTarget.value)}
                             />
                         </label>
+
                         <button type="submit">Change Seed String</button>
+
                         <button
                             type="button"
                             onClick={() => {
@@ -96,6 +97,8 @@ const App: React.FC = () => {
                         >
                             Randomize
                         </button>
+
+                        <SeedSettings seed={seedObject} setSeed={seedStore.set.seed} />
                     </fieldset>
 
                     <fieldset>

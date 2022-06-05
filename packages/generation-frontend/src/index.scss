@@ -45,13 +45,29 @@ label {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 8px;
+    gap: 16px;
+
+    & > section {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+    }
 }
 
 button {
     width: 100%;
+    cursor: pointer;
 }
 
 select {
     flex-grow: 1;
+}
+
+.lightbox {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #00000033;
 }

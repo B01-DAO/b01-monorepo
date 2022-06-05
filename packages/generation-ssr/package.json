@@ -26,6 +26,7 @@
   "dependencies": {
     "3d-core-raub": "^3.6.0",
     "@nouns/generation-core": "workspace:../generation-core",
+    "@nouns/sdk": "workspace:../nouns-sdk",
     "@types/three": "^0.139.0",
     "cli-progress": "^3.10.0",
     "command-line-args": "^5.2.1",

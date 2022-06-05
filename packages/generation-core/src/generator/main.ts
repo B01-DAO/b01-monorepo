@@ -1,3 +1,5 @@
+import { NounSeed } from '@nouns/sdk';
+
 import { mainStore, MainStore } from './store/mainStore';
 import { buildDriveway } from './driveWay';
 import { addTree } from './tree';
@@ -20,13 +22,15 @@ import { EnvironmentTypes, envWithBase, envWithWater } from './constants/environ
 import { buildAsteroid } from './asteroids';
 import { seedStore } from './store/seedStore';
 
-export function startGenerating(store: MainStore, seed?: string) {
-    mainStore.set.state(() => store);
-    if (seed && seed.length > 4) {
-        seedStore.set.seedString(seed);
-    } else {
-        randomizeSeed();
-    }
+export function startGenerating(
+    store: MainStore,
+    { seed = {} as Partial<NounSeed>, rawSeed = '' } = {},
+) {
+    mainStore.set.state(defaults => ({ ...defaults, ...store }));
+    seedStore.set.seed({ ...seedStore.get.seed, ...(seed as NounSeed) });
+
+    if (rawSeed && rawSeed.length > 4) seedStore.set.seedString(rawSeed);
+    else randomizeSeed();
 }
 
 export function buildModel() {

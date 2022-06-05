@@ -1,5 +1,4 @@
 export default {
-    buildOptions: {
-        target: 'es6',
-    },
+    buildOptions: { target: 'es6' },
+    declaration: 'normal',
 };
