@@ -29,7 +29,7 @@ let activeJob: number | undefined = undefined;
  */
 const generate = async (nounId: number, seed: NounSeed) => {
   // generate assets
-  const { image, gltf, webm } = await generateAssets();
+  const { image, gltf, webm } = await generateAssets({ seed });
 
   const imageFile = new File([image], `${nounId}.png`, { type: 'image/png' });
   const gltfFile = new File([gltf], `${nounId}.gltf`, { type: 'model/gltf' });
