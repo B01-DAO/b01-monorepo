@@ -91,6 +91,7 @@ importers:
       typescript: ~4.6.2
       vite: ^2.9.1
       vite-plugin-environment: ^1.1.0
+      zustand: 4.0.0-rc.1
     dependencies:
       '@nouns/generation-core': link:../generation-core
       '@nouns/sdk': link:../nouns-sdk
@@ -101,6 +102,7 @@ importers:
       sass: 1.52.1
       three: 0.139.2
       vite: 2.9.9_sass@1.52.1
+      zustand: 4.0.0-rc.1_react@18.1.0
     devDependencies:
       '@types/color': 3.0.3
       '@types/react': 18.0.9
@@ -24507,6 +24509,14 @@ packages:
       react: 18.1.0
     dev: false
 
+  /use-sync-external-store/1.1.0_react@18.1.0:
+    resolution: {integrity: sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.1.0
+    dev: false
+
   /use/3.1.1:
     resolution: {integrity: sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==}
     engines: {node: '>=0.10.0'}
@@ -26399,6 +26409,22 @@ packages:
 
   /zen-observable/0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
+    dev: false
+
+  /zustand/4.0.0-rc.1_react@18.1.0:
+    resolution: {integrity: sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      react: 18.1.0
+      use-sync-external-store: 1.1.0_react@18.1.0
     dev: false
 
   github.com/edgeandnode/gluegun/b34b9003d7bf556836da41b57ef36eb21570620a_debug@4.3.4:
