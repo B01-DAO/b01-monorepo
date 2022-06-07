@@ -9,7 +9,7 @@ import { baseScene, initScene } from './base';
 import { addWaterFeature } from './waterfeature';
 import { addGrassFeature } from './grassFeature';
 import { addRandomPerson } from './person';
-import { customRandom, randomizeSeed } from './helpers/math';
+import { customRandom, randomizeSeed, deterministicRandom } from './helpers/math';
 import { buildRainbow, buildStars } from './site';
 import { landscapeStore } from './store/landscapeStore';
 import { buildRocket } from './rocket';
@@ -27,10 +27,23 @@ export function startGenerating(
     { seed = {} as Partial<NounSeed>, rawSeed = '' } = {},
 ) {
     mainStore.set.state(defaults => ({ ...defaults, ...store }));
-    seedStore.set.seed({ ...seedStore.get.seed, ...(seed as NounSeed) });
+    const newSeed: NounSeed = { ...seedStore.get.seed(), ...seed };
 
-    if (rawSeed && rawSeed.length > 4) seedStore.set.seedString(rawSeed);
-    else randomizeSeed();
+    if (rawSeed && rawSeed.length > 4) {
+        seedStore.set.seedString(rawSeed);
+
+        const originalSeed = seedStore.get.originalSeed();
+
+        if (originalSeed > 5) {
+            seedStore.set.seed({
+                ...newSeed,
+                greenRooftopP: deterministicRandom(originalSeed)() * 127.5,
+            });
+        }
+    } else {
+        seedStore.set.seed(newSeed);
+        randomizeSeed();
+    }
 }
 
 export function buildModel() {

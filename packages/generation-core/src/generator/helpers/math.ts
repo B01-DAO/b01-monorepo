@@ -41,7 +41,6 @@ seedStore.store.subscribe(() => {
         buildingStore.set.rotateYProbability(buildingRandom() * 0.5);
         buildingStore.set.tripleSizeProbability(randomRange(buildingRandom(), 0, 0.3));
         buildingStore.set.allVolumesSameSize(buildingRandom() < 0.5);
-        buildingStore.set.greenRoofProbability(buildingRandom() * 0.5);
         buildingStore.set.cylinderProbability(buildingRandom() * 0.5);
         buildingStore.set.hasCylinders(buildingRandom() < 0.5);
         buildingStore.set.dodecahedronProbability(buildingRandom() * 0.2);

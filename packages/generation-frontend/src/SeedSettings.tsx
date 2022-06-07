@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { NounSeed } from '@nouns/sdk';
 
 import NumberInput from './NumberInput';
@@ -22,6 +22,10 @@ const SeedSettings: React.FC<SeedSettingsProps> = ({ seed, setSeed }) => {
     // @types/react should really update their types 🙃
     const show = () => (dialog.current as any).showModal();
     const hide = () => (dialog.current as any).close();
+
+    // maintain parity between outer state and inner state
+    useEffect(() => setLocalState(seed), [seed]);
+    
 
     return (
         <>

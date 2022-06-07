@@ -31,7 +31,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
                     step={step}
                 />
 
-                <output>{value}</output>
+                <output>{value.toFixed(0)}</output>
             </section>
         </label>
     );

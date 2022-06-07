@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 
+import { seedStore } from './store/seedStore';
 import { ConvexGeometry } from '../vendor/ConvexGeometry';
 import { buildBush } from './bush';
 import { greenAreaParameters } from './constants/constants';
@@ -13,7 +14,7 @@ let roofMaterial: THREE.MeshPhysicalMaterial = new THREE.MeshPhysicalMaterial({ 
 let pGreenRoof = 0;
 let usePitchedRoofs = false;
 
-buildingStore.store.subscribe(({ greenRoofProbability }) => (pGreenRoof = greenRoofProbability));
+seedStore.store.subscribe(({ seed }) => (pGreenRoof = seed.greenRooftopP / 255));
 buildingStore.store.subscribe(({ hasPitchedRoofs }) => (usePitchedRoofs = hasPitchedRoofs));
 
 export function buildGreenRoof(

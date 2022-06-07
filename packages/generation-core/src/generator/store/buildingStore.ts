@@ -10,7 +10,6 @@ export const buildingStore = createStore('buildingStore')({
     defaultLength: 0.1,
     tripleSizeProbability: 0,
     allVolumesSameSize: true,
-    greenRoofProbability: 0,
     cylinderProbability: 0,
     maxHeight: 5,
     hasCylinders: true,
