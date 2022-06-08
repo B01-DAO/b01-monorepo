@@ -27,7 +27,7 @@ seedStore.store.subscribe(() => {
 
         const defaultY = (0.5 - buildingRandom()) * 10;
         const color = randomColor(buildingRandom);
-        const maxHeight = randomRange(buildingRandom(), 3, 8);
+        const maxHeight = seedStore.get.seed().maxVolumeHeight;
 
         let treeType = TreeTypes.Sphere;
         if (customRandom() < 0.5) treeType = TreeTypes.Cone;
@@ -45,7 +45,6 @@ seedStore.store.subscribe(() => {
         buildingStore.set.hasCylinders(buildingRandom() < 0.5);
         buildingStore.set.dodecahedronProbability(buildingRandom() * 0.2);
         buildingStore.set.hasDodecahedron(buildingRandom() < 0.5);
-        buildingStore.set.maxHeight(maxHeight);
         buildingStore.set.hasPitchedRoofs(buildingRandom() < 0.5);
 
         const specialShapeRandomValue = buildingRandom();

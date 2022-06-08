@@ -9,11 +9,11 @@ import {
 } from '../base';
 import { buildingRandom, customRandom, randomRange } from './math';
 import { baseParameters } from '../constants/buildingConstants';
-import { buildingStore } from '../store/buildingStore';
+import { seedStore } from '../store/seedStore';
 import { getSiteY } from './siteHelper';
 
 let maxFloors = 5;
-buildingStore.store.subscribe(({ maxHeight }) => (maxFloors = maxHeight));
+seedStore.store.subscribe(({ seed }) => (maxFloors = seed.maxVolumeHeight));
 
 export function buildablePosition(
     width: number,

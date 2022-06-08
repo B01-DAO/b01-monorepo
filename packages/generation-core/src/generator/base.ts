@@ -7,7 +7,7 @@ import { renderParameters, sceneParameters } from './constants/constants';
 import { lightParameterList } from './constants/lightConstants';
 import { baseParameters } from './constants/buildingConstants';
 import { getRenderer } from './renderer';
-import { buildingStore } from './store/buildingStore';
+import { seedStore } from './store/seedStore';
 import { buildSite, rainbowMaterials } from './site';
 import { environmentStore } from './store/environmentStore';
 import { seasonList } from './constants/seasons';
@@ -32,7 +32,7 @@ let changeSeason = true;
 let autoRotate = true;
 
 let maxFloors = 5;
-buildingStore.store.subscribe(({ maxHeight }) => (maxFloors = maxHeight));
+seedStore.store.subscribe(({ seed }) => (maxFloors = seed.maxVolumeHeight));
 
 export function initBaseScene() {
     reset();
