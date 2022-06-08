@@ -29,6 +29,7 @@ const height = renderParameters.height;
 let frames = 0;
 let changeTimeOfDay = true;
 let changeSeason = true;
+let autoRotate = true;
 
 let maxFloors = 5;
 buildingStore.store.subscribe(({ maxHeight }) => (maxFloors = maxHeight));
@@ -64,12 +65,10 @@ export function initScene() {
 
     buildRenderer();
 
-    if (!controls) {
-        controls = new OrbitControls(camera, renderer.domElement);
-        controls.target = new THREE.Vector3(0, 0.2, 0);
-        controls.autoRotate = true; // new URLSearchParams(window.location.search).has('rotate');
-        controls.update();
-    }
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.target = new THREE.Vector3(0, 0.2, 0);
+    controls.autoRotate = autoRotate; // new URLSearchParams(window.location.search).has('rotate');
+    controls.update();
 
     if (captureFrames) progressHandler({ type: 'start' });
 }
@@ -84,7 +83,8 @@ export function reset() {
 }
 
 export function toggleRotation() {
-    controls.autoRotate = !controls.autoRotate;
+    autoRotate = !autoRotate;
+    controls.autoRotate = autoRotate;
 }
 
 export function toggleChangeTimeOfDay() {

@@ -136,10 +136,10 @@ const App: React.FC = () => {
                             Toggle Rotation
                         </button>
                         <button type="button" onClick={() => toggleChangeTimeOfDay()}>
-                            Change Lighting
+                            Toggle Change Lighting
                         </button>
                         <button type="button" onClick={() => toggleChangeSeason()}>
-                            Change Season
+                            Toggle Change Season
                         </button>
                     </fieldset>
 
