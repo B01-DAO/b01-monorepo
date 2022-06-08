@@ -60,9 +60,7 @@ export function buildModel() {
             baseScene.add(buildRocket());
     }
 
-    const numBoxes = customRandom() * 30 + 3;
-
-    for (let i = 0; i < numBoxes; i++) addBuilding();
+    for (let i = 0; i < seedStore.get.seed().volumeCount; i++) addBuilding();
 
     buildDriveway();
 
