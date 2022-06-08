@@ -54,7 +54,6 @@ seedStore.store.subscribe(() => {
             buildingStore.set.specialShape(SpecialShapeTypes.capsule);
         }
 
-        landscapeStore.set.treeCount(randomRange(customRandom(), 0, 200));
         landscapeStore.set.treeType(Math.floor(randomRange(customRandom(), 0, 2)));
         landscapeStore.set.treeType(treeType);
         landscapeStore.set.treeScale(randomRange(customRandom(), 0.3, 1));

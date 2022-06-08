@@ -47,6 +47,8 @@ export function startGenerating(
 }
 
 export function buildModel() {
+    const { volumeCount, waterFeatureCount, grassFeatureCount, treeCount, bushCount, peopleCount } =
+        seedStore.get.seed();
     initScene();
 
     switch (environmentStore.get.currentEnvironment()) {
@@ -60,50 +62,35 @@ export function buildModel() {
             baseScene.add(buildRocket());
     }
 
-    for (let i = 0; i < seedStore.get.seed().volumeCount; i++) addBuilding();
+    for (let i = 0; i < volumeCount; i++) addBuilding();
 
     buildDriveway();
 
     if (environmentStore.get.currentEnvironment() !== EnvironmentTypes.underWater) {
-        if (customRandom() < 0.5) {
-            buildRainbow();
-        }
-        if (customRandom() < 0.5) {
-            buildStars();
-        }
+        if (customRandom() < 0.5) buildRainbow();
+
+        if (customRandom() < 0.5) buildStars();
     }
 
-    for (let i = 0; i < 10; i++) {
-        addWaterFeature();
-        addGrassFeature();
-    }
+    for (let i = 0; i < waterFeatureCount; i++) addWaterFeature();
+
+    for (let i = 0; i < grassFeatureCount; i++) addGrassFeature();
 
     if (envWithBase.some(env => environmentStore.get.currentEnvironment() === env)) {
-        for (let i = 0; i < landscapeStore.get.treeCount(); i++) addTree();
-        const bushCount = customRandom() * 100;
-        for (let i = 0; i < bushCount; i++) {
-            addBush(true);
-        }
+        for (let i = 0; i < treeCount; i++) addTree();
+        for (let i = 0; i < bushCount; i++) addBush(true);
     }
 
-    for (let i = 0; i < 20; i++) {
-        addRandomPerson();
-    }
+    for (let i = 0; i < peopleCount; i++) addRandomPerson();
 
     if (envWithWater.some(env => env === environmentStore.get.currentEnvironment())) {
-        for (let i = 0; i < 100; i++) {
-            addFish();
-        }
+        for (let i = 0; i < 100; i++) addFish();
     }
 
     if (environmentStore.get.currentEnvironment() === EnvironmentTypes.clouds) {
-        for (let i = 0; i < 40; i++) {
-            addCloud();
-        }
+        for (let i = 0; i < 40; i++) addCloud();
     }
     if (environmentStore.get.currentEnvironment() === EnvironmentTypes.space) {
-        for (let i = 0; i < 40; i++) {
-            buildAsteroid();
-        }
+        for (let i = 0; i < 40; i++) buildAsteroid();
     }
 }
