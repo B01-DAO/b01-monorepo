@@ -1,4 +1,4 @@
-import { INounsSeeder } from '@nouns/contracts/dist/typechain-types/INounsToken';
+import { INounsSeeder } from '@nouns/contracts/dist/typechain-types';
 import { NounSeed } from './types';
 
 export const convertContractSeedToSeed = (cSeed: INounsSeeder.SeedStruct): NounSeed => ({

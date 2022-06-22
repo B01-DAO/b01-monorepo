@@ -1,6 +1,6 @@
 import { generateAssets } from '@nouns/generation-ssr';
-import { NounSeed, NounMetadata, convertContractSeedToSeed } from '@nouns/sdk';
-import { INounsSeeder } from '@nouns/contracts/dist/typechain-types/INounsToken';
+import { NounSeed, convertContractSeedToSeed } from '@nouns/sdk';
+import { INounsSeeder } from '@nouns/contracts/dist/typechain-types';
 import { tryF, isError } from 'ts-try';
 import { File } from 'nft.storage';
 import { storage, nounsTokenContract } from '../clients';
@@ -30,6 +30,8 @@ let activeJob: number | undefined = undefined;
 const generate = async (nounId: number, seed: NounSeed) => {
   // generate assets
   const { image, gltf, webm } = await generateAssets({ seed });
+
+  console.log('Got assets!', image);
 
   const imageFile = new File([image], `${nounId}.png`, { type: 'image/png' });
   const gltfFile = new File([gltf], `${nounId}.gltf`, { type: 'model/gltf' });

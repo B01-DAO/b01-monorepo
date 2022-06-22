@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers';
-import { INounsSeeder } from '@nouns/contracts/dist/typechain-types/INounsToken';
+import { INounsSeeder } from '@nouns/contracts/dist/typechain-types';
 import { generateSafe } from '../handlers';
 import { nounsTokenContract } from './../clients';
 import { NounSeed } from '@nouns/sdk';

@@ -12,10 +12,9 @@
   ],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "build": "pnpm build:sol && pnpm build:ts && pnpm build:declarations",
+    "build": "pnpm build:sol && pnpm build:ts",
     "build:ts": "tsc -p tsconfig.build.json",
     "build:sol": "npx hardhat compile",
-    "build:declarations": "shx cp typechain-types/*.d.ts dist/typechain-types",
     "hardhat": "npx hardhat",
     "task:accounts": "npx hardhat accounts",
     "task:deploy": "npx hardhat deploy",
