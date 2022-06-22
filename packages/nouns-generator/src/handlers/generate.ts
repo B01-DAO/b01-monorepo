@@ -1,6 +1,6 @@
 import { generateAssets } from '@nouns/generation-ssr';
 import { NounSeed, NounMetadata, convertContractSeedToSeed } from '@nouns/sdk';
-import { INounsSeeder } from '@nouns/contracts/typechain-types/INounsToken';
+import { INounsSeeder } from '@nouns/contracts/dist/typechain-types/INounsToken';
 import { tryF, isError } from 'ts-try';
 import { File } from 'nft.storage';
 import { storage, nounsTokenContract } from '../clients';
