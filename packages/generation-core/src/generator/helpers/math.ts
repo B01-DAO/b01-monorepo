@@ -10,16 +10,14 @@ import { landscapeStore } from '../store/landscapeStore';
 import { SpecialShapeTypes, TreeTypes } from '../constants/constants';
 import { environmentStore } from '../store/environmentStore';
 import { EnvironmentTypes } from '../constants/environmentConstants';
-import { buildModel } from '../main';
-import { initBaseScene } from '../base';
 
 export let customRandom: () => number;
 export let buildingRandom: () => number;
 
-seedStore.store.subscribe(() => {
-    const seed = seedStore.get.originalSeed();
+seedStore.store.subscribe(updateStores);
 
-    initBaseScene();
+export function updateStores() {
+    const seed = seedStore.get.originalSeed();
 
     if (seed > 5) {
         customRandom = deterministicRandom(seed);
@@ -76,10 +74,8 @@ seedStore.store.subscribe(() => {
         environmentStore.set.currentSeasonName(seasonName);
 
         buildingStore.set.globalDefaultY(defaultY);
-
-        buildModel();
     }
-});
+}
 
 export function randomRange(randomValue: number, min: number, max: number) {
     return randomValue * (max - min) + min;

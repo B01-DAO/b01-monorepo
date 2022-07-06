@@ -70,6 +70,8 @@ export function initScene() {
     controls.autoRotate = autoRotate; // new URLSearchParams(window.location.search).has('rotate');
     controls.update();
 
+    animation();
+
     if (captureFrames) progressHandler({ type: 'start' });
 }
 
@@ -80,6 +82,7 @@ export function reset() {
     landscapeBoundingBoxes = [];
     craftBoundingBoxes = [];
     renderer?.domElement?.remove?.();
+    frames = 0;
 }
 
 export function toggleRotation() {
@@ -98,7 +101,6 @@ export function toggleChangeSeason() {
 function buildRenderer() {
     renderer = getRenderer({ height, width });
     renderer.domElement.id = sceneParameters.canvasId;
-    animation();
     return renderer;
 }
 
@@ -106,7 +108,7 @@ function animation() {
     const { framesToRecord, captureFrames, requestAnimationFrame, isWebApp } =
         mainStore.get.state();
 
-    if (isWebApp || frames <= framesToRecord) requestAnimationFrame(animation);
+    if (isWebApp || frames < framesToRecord) requestAnimationFrame(animation);
 
     rainbow.lookAt(camera.position);
     rainbowMaterials.forEach(material =>
@@ -151,5 +153,8 @@ function captureFramesIfNeeded() {
     const { framesToRecord, progressHandler } = mainStore.get.state();
 
     if (frames <= framesToRecord) progressHandler({ type: 'inc', frame: frames });
-    else progressHandler({ type: 'stop' });
+    else {
+        progressHandler({ type: 'stop' });
+        reset();
+    }
 }

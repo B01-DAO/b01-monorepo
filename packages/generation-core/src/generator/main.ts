@@ -5,13 +5,12 @@ import { buildDriveway } from './driveWay';
 import { addTree } from './tree';
 import { addBush } from './bush';
 import { addBuilding } from './building';
-import { baseScene, initScene } from './base';
+import { baseScene, initBaseScene, initScene } from './base';
 import { addWaterFeature } from './waterfeature';
 import { addGrassFeature } from './grassFeature';
 import { addRandomPerson } from './person';
 import { customRandom, randomizeSeed, deterministicRandom } from './helpers/math';
 import { buildRainbow, buildStars } from './site';
-import { landscapeStore } from './store/landscapeStore';
 import { buildRocket } from './rocket';
 import { addFish } from './fish';
 import { environmentStore } from './store/environmentStore';
@@ -29,6 +28,8 @@ export function startGenerating(
     mainStore.set.state(defaults => ({ ...defaults, ...store }));
     const newSeed: NounSeed = { ...seedStore.get.seed(), ...seed };
 
+    initBaseScene();
+
     if (rawSeed && rawSeed.length > 4) {
         seedStore.set.seedString(rawSeed);
 
@@ -44,6 +45,8 @@ export function startGenerating(
         seedStore.set.seed(newSeed);
         randomizeSeed();
     }
+
+    if (seedStore.get.originalSeed() > 5) buildModel();
 }
 
 export function buildModel() {

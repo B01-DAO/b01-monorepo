@@ -2,6 +2,7 @@ import path from 'path';
 import child_process from 'child_process';
 import fs from 'fs/promises';
 
+import rimraf from 'rimraf';
 import { NounSeed } from '@nouns/sdk';
 import { startGenerating } from '@nouns/generation-core';
 
@@ -17,7 +18,8 @@ export const generateAssets = async ({
     const outDir = path.join(__dirname, '../out');
 
     // ensure empty outDir
-    await fs.rm(outDir, { recursive: true, force: true });
+    rimraf.sync(outDir);
+    // await fs.rm(outDir, { recursive: true, force: true });
     await fs.mkdir(outDir, { recursive: true });
 
     await new Promise<void>(res => {
@@ -40,6 +42,9 @@ export const generateAssets = async ({
         );
         writeModel(`${outDir}/out.gltf`);
     });
+
+    console.log('Image generation finished!');
+    console.log('Generating webm via ffmpeg...');
 
     child_process.execSync(
         `${path.join(
