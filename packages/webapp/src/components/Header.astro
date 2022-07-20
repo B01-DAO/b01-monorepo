@@ -1,0 +1,45 @@
+---
+---
+
+<header class='p-2 flex w-full justify-between items-center'>
+    <section class='p-2 flex items-center'>
+        <span
+            class='glyph h-8 w-8 select-none mr-2 flex justify-center items-center font-sans font-black text-lg text-white rounded border-2 border-purple-600'
+            >A
+        </span>
+        <h3 class='tracking-widest font-sans font-black text-white text-effect'>AB01</h3>
+    </section>
+
+    <section class="p-2 flex items-center gap-8">
+        <a class="link" href='#'>Playground</a>
+        <a class="link" href='#'>Team</a>
+        <a class="link" href='#'>Docs</a>
+
+        <button type='button'>🌞</button>
+
+        <button type='button' class="py-2 px-6 rounded-md text-white uppercase font-sans font-bold connect-button">Connect Wallet</button>
+    </section>
+</header>
+
+<style>
+    .glyph {
+        background: radial-gradient(
+            117.71% 117.71% at 0% 0%,
+            #ffb393 0%,
+            #fc9ee7 36.98%,
+            #a442f1 100%
+        );
+    }
+
+    .text-effect {
+        text-shadow: 1px 0px 0px #b795ff, -1px 0px 0px #ff82f2;
+    }
+
+    .link {
+        @apply flex justify-center items-center uppercase text-gray-100 font-bold font-sans;
+    }
+
+    .connect-button {
+        background: linear-gradient(89.59deg, #4E70E8 -12.27%, #6743FA 107.42%);
+    }
+</style>

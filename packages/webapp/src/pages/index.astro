@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title='Welcome to Astro.'>
+    <main class='w-full h-full'>
+        <Header />
+    </main>
+</Layout>
+
+<style>
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+
+    main {
+        background: linear-gradient(
+            178.69deg,
+            #0d0f20 1.12%,
+            #0d0f20 15.5%,
+            #261054 70.65%,
+            #000a24 100.74%
+        );
+    }
+</style>
