@@ -1,0 +1,39 @@
+---
+---
+
+<section class='w-full flex justify-center items-center gap-8 flex-col overflow-hidden'>
+    <section class='left flex gap-8'>
+        {Array(25).fill(<section class="placeholder">[PLACEHOLDER]</section>)}
+    </section>
+    <section class='right flex gap-8'>
+        {Array(25).fill(<section class="placeholder">[PLACEHOLDER]</section>)}
+    </section>
+    <section class='left flex gap-8'>
+        {Array(25).fill(<section class="placeholder">[PLACEHOLDER]</section>)}
+    </section>
+</section>
+
+<style>
+    .placeholder {
+        width: 306px;
+        height: 247px;
+        @apply bg-gray-200 flex justify-center items-center rounded-lg;
+    }
+
+    @keyframes move {
+        from {
+            transform: translateX(-100vh);
+        }
+        to {
+            transform: translateX(100vh);
+        }
+    }
+
+    .right > section {
+        animation: move 180s linear infinite;
+    }
+
+    .left > section {
+        animation: move 180s linear infinite reverse;
+    }
+</style>

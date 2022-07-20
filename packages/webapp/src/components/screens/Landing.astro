@@ -1,0 +1,33 @@
+---
+import TextEffect from '../TextEffect.astro';
+import VectorShapes from '../../assets/images/vector_shapes.svg';
+---
+
+<section class='h-screen w-full p-32 flex justify-center items-center gap-8 relative'>
+    <section>
+        <TextEffect class='text-8xl leading-none'>Autonomous Block 01</TextEffect>
+        <span class='font-serif text-2xl font-bold tagline'
+            >Procedurally generated habitats for the metaverse.
+        </span>
+    </section>
+
+    <section class='placeholder'>[PLACEHOLDER]</section>
+
+    <img class='absolute bottom-0 w-full' src={VectorShapes} />
+</section>
+
+<style>
+    .tagline {
+        background: linear-gradient(269.84deg, #fb9ce0 -1.54%, #d68ef9 46.37%, #afc4fa 104.2%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .placeholder {
+        width: 822px;
+        height: 568px;
+        @apply bg-gray-200 flex justify-center items-center;
+    }
+</style>

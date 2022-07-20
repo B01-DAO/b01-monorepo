@@ -1,0 +1,51 @@
+---
+export interface Props {
+    class?: string;
+}
+---
+
+<h5 class={`base ${Astro.props.class}`}>
+    <span role='presentation'>
+        <slot></slot>
+    </span>
+    <span role='presentation'>
+        <slot></slot>
+    </span>
+    <span role='presentation'>
+        <slot></slot>
+    </span>
+    <span role='presentation'>
+        <slot></slot>
+    </span>
+    <span class='shadow' role='presentation'>
+        <slot></slot>
+    </span>
+    <span class='main shadow'>
+        <slot></slot>
+    </span>
+</h5>
+
+<style>
+    .base {
+        @apply font-serif text-4xl font-bold relative text-center;
+    }
+
+    span {
+        background: linear-gradient(268.15deg, #f4328f 6.73%, #dc3cf7 39%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        position: absolute;
+        mix-blend-mode: screen;
+    }
+
+    .shadow {
+        text-shadow: 0px 0px 8px #fb00c4;
+    }
+
+    .main {
+        position: static;
+        mix-blend-mode: normal;
+    }
+</style>

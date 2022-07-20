@@ -1,11 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
+import Landing from '../components/screens/Landing.astro';
+import Carousel from '../components/screens/CarouselScreen.astro';
+
+import '../assets/styles/global.scss';
 ---
 
 <Layout title='Welcome to Astro.'>
-    <main class='w-full h-full'>
+    <main class='w-full'>
         <Header />
+
+        <Landing />
+
+        <Carousel />
     </main>
 </Layout>
 

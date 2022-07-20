@@ -1,0 +1,36 @@
+---
+export interface Props {
+    class?: string;
+}
+---
+
+<h3 class={`base ${Astro.props.class}`}>
+    <slot></slot>
+    <span class='left' role='presentation'>
+        <slot></slot>
+    </span>
+    <span class='right' role='presentation'>
+        <slot></slot>
+    </span>
+</h3>
+
+<style>
+    .base {
+        @apply flex justify-center items-center font-sans font-black text-white relative;
+    }
+
+    span {
+        mix-blend-mode: screen;
+        position: absolute;
+    }
+
+    .left {
+        left: -1px;
+        color: #ff82f2;
+    }
+
+    .right {
+        left: 1px;
+        color: #b795ff;
+    }
+</style>

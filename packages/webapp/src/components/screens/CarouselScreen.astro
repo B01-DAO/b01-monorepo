@@ -1,0 +1,31 @@
+---
+import GlowText from '../GlowText.astro';
+import Carousel from '../Carousel.astro';
+import VectorGrid from '../../assets/images/vector_grid.svg';
+---
+
+<section class='w-full flex justify-center items-center flex-col relative'>
+    <img class='vector-grid' src={VectorGrid} />
+
+    <section class='p-16 max-w-6xl flex justify-center items-center flex-col gap-12'>
+        <span class='font-serif text-3xl font-medium text-white text-center'
+            >Designing an autonomous world, one block at a time, starting with Block 01.
+        </span>
+
+        <span class='font-serif text-3xl font-medium text-white text-center'
+            >Feel free to play with B01's generative architecture playground.
+        </span>
+    </section>
+
+    <GlowText class='mb-28'>Coming soon.</GlowText>
+
+    <Carousel />
+</section>
+
+<style>
+    .vector-grid {
+        mix-blend-mode: soft-light;
+        margin-top: -50%;
+        @apply absolute w-full;
+    }
+</style>
