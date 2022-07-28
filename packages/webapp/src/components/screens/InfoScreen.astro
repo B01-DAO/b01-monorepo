@@ -1,0 +1,98 @@
+---
+import Diagram from '@assets/images/diagram.png';
+import Auction from '@assets/images/auction.png';
+import FlatGrid from '@assets/images/flat_grid.svg';
+---
+
+<section class='w-full pt-56 pl-80 pr-52 pb-56 flex flex-col'>
+    <section class='self-start max-w-xl'>
+        <h1>What?</h1>
+        <p class='text-white'>
+            AB01 is the first 3D generative onchain geometry, randomly created to resemble a
+            potential habitat for the metaverse. Each AB01 is a non-fungible token on the Ethereum
+            blockchain under CC0 license (link).
+        </p>
+    </section>
+
+    <section class='self-end max-w-xl mt-36'>
+        <h1>Why?</h1>
+        <p class='text-white'>
+            AB01 is born out of a response to the lack of content land grabs of the metaverse and
+            not so egalitarian nature of the flash minting model.
+        </p>
+    </section>
+
+    <section class='flex gap-5 items-center self-start mt-52'>
+        <section class='pb-4 max-w-xl'>
+            <h1>How?</h1>
+            <p class='text-white'>
+                Each AB01 is generated from a randomized seed, which procedurally determines the
+                parameters of the constituent parts to form infinite unique new configurations
+                (design doc here). AB01 does not have pre-designed traits, each one is uniquely and
+                equally rare.
+            </p>
+        </section>
+        <img class='diagram' src={Diagram} alt='' role='presentation' />
+    </section>
+
+    <section class='flex gap-5 items-center self-end mt-40'>
+        <img class='auction' src={Auction} alt='' role='presentation' />
+        <section class='relative max-w-xl'>
+            <img class='grid' src={FlatGrid} alt='' role='presentation' />
+            <h1 class='relative z-10'>Auction</h1>
+            <p class='text-white relative z-10'>
+                One AB01 will be generated every hour and auctioned off to the highest bidder for
+                the duration of the next two years. With a total supply of <span
+                    class='text-purple-400'
+                    >17,520
+                </span>, AB01 attempts to bootstrap a community, governance (AB DAO), and a treasury
+                (where all proceeds go to) to further the creation and development of democratically
+                designed, owned, and operated virtual spaces.
+            </p>
+        </section>
+    </section>
+
+    <section class='self-start max-w-xl mt-28'>
+        <h1>Team Reward</h1>
+        <p class='text-white'>
+            AB01 is created by a group of paper architects (wikipedia links), who will be rewarded
+            in the form of AB01s periodically.
+        </p>
+    </section>
+</section>
+
+<style>
+    h1 {
+        font-style: normal;
+        font-weight: 900;
+        font-size: 96px;
+        line-height: 113px;
+
+        /* landing gradient text */
+
+        background: linear-gradient(90deg, #c486f4 -2.89%, #ff88a5 41.49%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .diagram {
+        height: 374px;
+        width: 608px;
+    }
+
+    .auction {
+        height: 416px;
+        width: 735px;
+        margin-left: -174px;
+    }
+
+    .grid {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: -50px;
+        height: 100%;
+        width: 100%;
+    }
+</style>
